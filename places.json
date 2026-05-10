@@ -1,0 +1,592 @@
+[
+  {
+    "category": "groceries",
+    "mapCategory": "🛒 Groceries",
+    "name": "Albert Heijn",
+    "image": "Places/Albert-Heijn-Van-Heekplein-2023-Centrum-Enschede-1.webp",
+    "description": "As the largest supermarket chain in the Netherlands, Albert Heijn offers an extensive assortment from fresh produce and bakery goods to household essentials, premium and store brand items. Their Enschede Centrum location features in-store pick-up and parcel services, plus bonus offers and loyalty perks. Expect high quality, seasonal selections, ready-to-eat meal options, international foods, and a dedicated service desk for returns, photo printing, and lottery tickets.",
+    "mapUrl": "https://maps.app.goo.gl/6pcgJQ8oQbPNkEnK7",
+    "lat": 52.2175,
+    "lng": 6.8958
+  },
+  {
+    "category": "groceries",
+    "mapCategory": "🛒 Groceries",
+    "name": "Jumbo",
+    "image": "Places/jumbo.jpeg",
+    "description": "Jumbo is the second largest supermarket chain in the Netherlands, known for its lowest price guarantee, large assortment, and fresh produce. This Enschede location combines in-store shopping, pick-up, and delivery services. It stocks everyday staples, household goods, specialty items, and frequently updated deals on pasta, rice, snacks, and personal care.",
+    "mapUrl": "https://maps.app.goo.gl/NYB8Q6S7Au8jhkFb9",
+    "lat": 52.2205,
+    "lng": 6.8926
+  },
+  {
+    "category": "groceries",
+    "mapCategory": "🛒 Groceries",
+    "name": "Lidl",
+    "image": "Places/lidl.jpg",
+    "description": "Lidl is known for its budget-friendly prices and weekly rotating specials. Their Enschede store offers fresh meats, vegetables, bakery items, dairy, and pantry basics, plus seasonal non-food items such as kitchen gadgets, textiles, and tools. While the standard range is smaller than full-service chains, Lidl delivers consistent quality at low cost.",
+    "mapUrl": "https://maps.app.goo.gl/RMgHtzrXi2gkFGUX6",
+    "lat": 52.2185,
+    "lng": 6.8903
+  },
+  {
+    "category": "groceries",
+    "mapCategory": "🛒 Groceries",
+    "name": "Aldi",
+    "image": "Places/Aldi.jpg",
+    "description": "Aldi is a cost-effective supermarket offering a no-frills shopping experience. Expect essentials like fresh produce, dairy, packaged food, and bakery goods. Their own-brand products prioritize simplicity and low price, and weekly specials may include seasonal groceries, household tools, or clothing basics.",
+    "mapUrl": "https://maps.app.goo.gl/rNsCyQx8Ei2hggwc9",
+    "lat": 52.2198,
+    "lng": 6.8870
+  },
+  {
+    "category": "groceries",
+    "mapCategory": "🛒 Groceries",
+    "name": "Kashmir Super Store – Gronau",
+    "image": "Places/Kashmir.jpg",
+    "description": "Located just across the German border in Gronau, this store specializes in South Asian groceries. You'll find a wide selection of halal spices, lentils, rice, snacks, frozen meats, and specialty sauces from India and Pakistan. Prices are competitive for ethnic products, and it's a popular destination for those seeking artisanal ingredients not typically found in Dutch supermarkets.",
+    "mapUrl": "https://maps.app.goo.gl/hqcTX1KmcyXN9WbB9",
+    "lat": 52.21598814189423, 
+    "lng": 7.001235805252621
+  },
+  {
+    "category": "groceries",
+    "mapCategory": "🛒 Groceries",
+    "name": "Toko Het Oosten – Asian Supermarket",
+    "image": "Places/Toko.jpg",
+    "description": "Excellent for Southeast and East Asian groceries: sauces, noodles, spices, fresh tofu, snacks, and frozen dumplings. Their shelves are well stocked, and you can often ask staff for cooking advice. A favorite for students and families seeking diverse Asian flavors.",
+    "mapUrl": "https://maps.app.goo.gl/8CRkMoJGDWsvWd3T6",
+    "lat": 52.2196,
+    "lng": 6.8942
+  },
+  {
+    "category": "groceries",
+    "mapCategory": "🛒 Groceries",
+    "name": "Toko Switi – Asian & African Supermarket",
+    "image": "Places/Toko_switi.jpg",
+    "description": "Offers a unique blend of Asian and African foods: spices, teas, snacks, frozen goods, and halal meats. Known for friendly staff and authentic imports, including West African sauces, Caribbean spices, and Asian condiments.",
+    "mapUrl": "https://maps.app.goo.gl/Zp1Lv6AkAb4CAzKD9",
+    "lat": 52.21974575227644, 
+    "lng": 6.8939585708646645
+  },
+  {
+    "category": "groceries",
+    "mapCategory": "🛒 Groceries",
+    "name": "Peter Hu Asian Supermarket",
+    "image": "Places/Peter.jpg",
+    "description": "Wide selection of Asian and African ingredients: noodles, sauces, spices, frozen seafood, and ready-to-cook products. Regular restocking ensures availability of fresh ingredients and seasonal items.",
+    "mapUrl": "https://maps.app.goo.gl/7aA3UxXfwS26WzM97",
+    "lat": 52.21970746068525, 
+    "lng": 6.901680051324172
+  },
+  {
+    "category": "groceries",
+    "mapCategory": "🛒 Groceries",
+    "name": "Sam's Toko – Asian Supermarket",
+    "image": "Places/Sam.jpg",
+    "description": "Convenient spot for Asian food staples, frozen goods, spices, snacks, and halal meats. Often praised for organized aisles and friendly service especially helpful if you're discovering new ingredients.",
+    "mapUrl": "https://maps.app.goo.gl/G1MkJ1czKcdCbo9H7",
+    "lat": 52.203923108726116, 
+    "lng": 6.892633993549303
+  },
+  {
+    "category": "groceries",
+    "mapCategory": "🛒 Groceries",
+    "name": "Togo Supermarkt en Levensmiddelen",
+    "image": "Places/Togo.jpg",
+    "description": "Local budget supermarket specializing in halal meat cuts, spices, pickles, and fresh vegetables. Known for low-cost essentials and community-oriented service. Best visited earlier in the day for full selection.",
+    "mapUrl": "https://maps.app.goo.gl/WWbreGRLcinwxbJC7",
+    "lat": 52.20895336375601, 
+    "lng": 6.894228952895088
+  },
+  {
+    "category": "groceries",
+    "mapCategory": "🛒 Groceries",
+    "name": "Ada Supermarket",
+    "image": "Places/Ada.jpg",
+    "description": "A small budget store offering Turkish sweets, halal meats, vegetables, spices, and pickles. Well-regarded for friendly owners and competitive prices on ethnic goods.",
+    "mapUrl": "https://maps.app.goo.gl/NfL462QRBvz2RFWw9",
+    "lat": 52.21999123653104, 
+    "lng": 6.904306046736308
+  },
+  {
+    "category": "groceries",
+    "mapCategory": "🛒 Groceries",
+    "name": "Ana Market",
+    "image": "Places/Ana.jpg",
+    "description": "Similar to Ada, this store stocks affordable halal meat, Turkish-style pickles, vegetables, spices, and sweets. Often praised for neat layout and frequent restocking.",
+    "mapUrl": "https://maps.app.goo.gl/NfL462QRBvz2RFWw9",
+    "lat": 52.22000983108611, 
+    "lng":  6.904300406778802
+  },
+  {
+    "category": "groceries",
+    "mapCategory": "🛒 Groceries",
+    "name": "Die Grenze",
+    "image": "Places/Die.jpg",
+    "description": "Cross-border discount store offering a variety of food and non-food products at low prices. Some packaged food may have close expiration dates — check labels carefully. Larger bargains found on household goods and snacks.",
+    "mapUrl": "https://maps.app.goo.gl/8XShLXpmndXpnaSy6",
+    "lat": 52.227930870435976, 
+    "lng": 6.897826205495437
+  },
+  {
+    "category": "groceries",
+    "mapCategory": "🛒 Groceries",
+    "name": "SPAR City Store",
+    "image": "Places/Spar.jpg",
+    "description": "Located in the city centre, it's perfect for on-the-go shoppers. Stocks everyday groceries, ready-made meals, sandwiches, and snacks. Ideal for quick lunch purchases and convenience items.",
+    "mapUrl": "https://maps.app.goo.gl/vMsQBAYWPRfhZfPD8",
+    "lat": 52.2207,
+    "lng": 6.8950
+  },
+  {
+    "category": "home",
+    "mapCategory": "🏠 Home Supplies",
+    "name": "Action – Budget Home & Living",
+    "image": "Places/Action.jpg",
+    "description": "Action is a fast-growing Dutch discount variety store with over 3,000 locations in Europe. The Enschede branch carries thousands of affordable products: home décor, stationery, seasonal decoration, DIY tools, cleaning supplies, personal care, small electronics, toys, and snacks. Ideal for essentials, craft supplies, and low-cost gadgets.",
+    "mapUrl": "https://maps.app.goo.gl/jkmDRQJWwcp89tRp7",
+    "lat": 52.2184,
+    "lng": 6.8901
+  },
+  {
+    "category": "home",
+    "mapCategory": "🏠 Home Supplies",
+    "name": "HEMA – Everyday Essentials & More",
+    "image": "Places/Hema.jpg",
+    "description": "HEMA Enschede offers a broad mix from household goods and décor to clothing, toys, stationery, and bakery items. There's also an in-store restaurant and takeaway corner serving sandwiches, rookworst, pea soup, cakes, and coffee. HEMA's own-label products are known for clean design and affordable quality.",
+    "mapUrl": "https://maps.app.goo.gl/4f7MTyGme1SLdoKY8",
+    "lat": 52.2174,
+    "lng": 6.8957
+  },
+  {
+    "category": "home",
+    "mapCategory": "🏠 Home Supplies",
+    "name": "IKEA Hengelo – Furniture & Kitchenware",
+    "image": "Places/Hengelo.jpg",
+    "description": "IKEA Hengelo is the regional destination for furniture, home organisation, kitchenware, and décor. The store includes free parking, a Småland children's play area, restaurant, and extensive customer services including kitchen planning, interior advice, delivery, assembly, returns, and van rental.",
+    "mapUrl": "https://maps.app.goo.gl/894F7pbd1C7qdSLw6",
+    "lat": 52.288734827716134, 
+    "lng": 6.768464369313472
+  },
+  {
+    "category": "home",
+    "mapCategory": "🏠 Home Supplies",
+    "name": "Recycle Enschede Kringloop – Second-hand Home Goods",
+    "image": "Places/Recycle_enschede.jpg",
+    "description": "Recycle Enschede is a social-enterprise thrift store offering used clothing, kitchenware, furniture, books and more. Handled with a focus on sustainability and social inclusion; they also provide home and business clearance services. Expect changing inventory and good deals on vintage or gently used goods.",
+    "mapUrl": "https://maps.app.goo.gl/qn1gcEpc8RahmGse6",
+    "lat": 52.2189,
+    "lng": 6.8912
+  },
+  {
+    "category": "clothing",
+    "mapCategory": "👕 Clothing",
+    "name": "Primark – Budget Fashion & Essentials",
+    "image": "Places/Primark.jpg",
+    "description": "This 5,555 m², three-floor Primark at H.J. van Heekplein is one of the largest in the Netherlands. You'll find affordable fashion across women's, men's, kids', and homeware departments. Stock includes seasonal trends, basics, accessories, beauty, and home lifestyle items.",
+    "mapUrl": "https://maps.app.goo.gl/LPnrW8EofneDFt2P6",
+    "lat": 52.2173,
+    "lng": 6.8962
+  },
+  {
+    "category": "clothing",
+    "mapCategory": "👕 Clothing",
+    "name": "Zara – Trendy Mid-Range Fashion",
+    "image": "Places/Zara.jpg",
+    "description": "Zara Enschede spans approximately 4,000 m² over two floors. The ground level is dedicated to women's fashion, while the first floor features men's, children's, baby wear, and home décor. Offers fast-fashion collections in multiple price ranges and regular thematic drops.",
+    "mapUrl": "https://maps.app.goo.gl/86yUx6snhHRcNzNn9",
+    "lat": 52.2172,
+    "lng": 6.8960
+  },
+  {
+    "category": "clothing",
+    "mapCategory": "👕 Clothing",
+    "name": "H&M – Affordable Fashion for All",
+    "image": "Places/H_M.jpg",
+    "description": "H&M in Enschede offers a broad selection of trend-led apparel for women, men, teens, children, and plus-size. You'll find seasonal capsules, sustainable-conscious lines, and basics at fair prices. Services typically include click-and-collect, garment recycling, and occasional in-store pop-ups.",
+    "mapUrl": "https://maps.app.goo.gl/ZBW17oMBN2yCpGwE8",
+    "lat": 52.2176,
+    "lng": 6.8953
+  },
+  {
+    "category": "clothing",
+    "mapCategory": "👕 Clothing",
+    "name": "Kringloopwarenhuis Het Goed – Second-hand Clothing",
+    "image": "Places/Kringloopwarenhuis.jpg",
+    "description": "This spacious thrift store offers a daily-changing inventory: second-hand clothing for women, men, children, books, toys, electronics, household goods, refurbished appliances, and furniture. All items are cleaned and quality-checked. Great for sustainable shopping with student-friendly prices.",
+    "mapUrl": "https://maps.app.goo.gl/e6BMWXnWUh9fUNYn7",
+    "lat": 52.21796,
+    "lng": 6.89956
+  },
+  {
+    "category": "pharmacy",
+    "mapCategory": "🧼 Pharmacy",
+    "name": "Kruidvat – Drugstore Chain",
+    "image": "Places/Kruidvat_Store_Exterior.jpg",
+    "description": "Kruidvat is one of the most widely available drugstore chains in the Netherlands. This store offers affordable personal care products, health essentials, toiletries, vitamins, makeup, and fragrances. In addition to A-brands, Kruidvat also features its own-label items known for competitive pricing.",
+    "mapUrl": "https://maps.app.goo.gl/uG4ghCRGCMt2ayfW9",
+    "lat": 52.2174,
+    "lng": 6.8959
+  },
+  {
+    "category": "pharmacy",
+    "mapCategory": "🧼 Pharmacy",
+    "name": "Etos – Beauty & Pharmacy",
+    "image": "Places/Etos.jpg",
+    "description": "Etos specializes in wellness and pharmacy-related items, with a clean and modern layout. The store stocks a wide range of skincare, makeup, vitamins, nutrition supplements, personal hygiene products, and family care essentials. Staff are usually available to give product advice.",
+    "mapUrl": "https://maps.app.goo.gl/Wi59az1om6uenjxZ6",
+    "lat": 52.2178,
+    "lng": 6.8955
+  },
+  {
+    "category": "pharmacy",
+    "mapCategory": "🧼 Pharmacy",
+    "name": "DA Drogist – Independent Pharmacy",
+    "image": "Places/DA.jpg",
+    "description": "DA Drogist is a more personalized drugstore experience, offering both popular and niche products in health, beauty, and wellness. The store includes a wide range of over-the-counter medications, natural remedies, vitamins, dermo-cosmetic brands, and grooming items.",
+    "mapUrl": "https://maps.app.goo.gl/sHt7qHcEhnCCwmk46",
+    "lat": 52.2183,
+    "lng": 6.8945
+  },
+  {
+    "category": "electronics",
+    "mapCategory": "💻 Electronics",
+    "name": "MediaMarkt – Consumer Electronics Superstore",
+    "image": "Places/MediaMarkt.jpg",
+    "description": "MediaMarkt is one of the largest electronics retailers in Europe. The Enschede branch features dedicated sections for laptops, smartphones, televisions, kitchen appliances, personal care gadgets, gaming consoles, printers, and accessories. Services include product consultation, extended warranties, on-site repairs, and in-store pick-up.",
+    "mapUrl": "https://maps.app.goo.gl/AfQzBGEoZaVdb5ps5",
+    "lat": 52.2156,
+    "lng": 6.8938
+  },
+  {
+    "category": "electronics",
+    "mapCategory": "💻 Electronics",
+    "name": "Phone House – SIM Cards & Mobile Accessories",
+    "image": "Places/Phone.jpg",
+    "description": "Phone House specializes in SIM card activations, prepaid phone plans, mobile accessories, and budget smartphones. You can find major prepaid carriers like Lycamobile, Lebara, and Odido, alongside a wide range of mobile essentials such as power banks, chargers, and screen protectors.",
+    "mapUrl": "https://maps.app.goo.gl/LYLf8LZbT2zCg1kL6",
+    "lat": 52.2177,
+    "lng": 6.8961
+  },
+  {
+    "category": "electronics",
+    "mapCategory": "💻 Electronics",
+    "name": "Odido Shop – Phones & Data Plans",
+    "image": "Places/odido.jpg",
+    "description": "Odido (formerly T-Mobile Netherlands) offers the latest smartphones, tablets, accessories, and flexible mobile contracts. The store provides postpaid and prepaid data plans, SIM card activations, eSIM support, and technical assistance for both individual and business customers.",
+    "mapUrl": "https://maps.app.goo.gl/R6DSe13Z5wLQAj9X8",
+    "lat": 52.2180,
+    "lng": 6.8958
+  },
+  {
+    "category": "electronics",
+    "mapCategory": "💻 Electronics",
+    "name": "Action – Budget Tech Accessories",
+    "image": "Places/Action.jpg",
+    "description": "While primarily a discount store for household and lifestyle goods, Action also carries a budget-friendly selection of electronics and tech accessories including USB cables, Bluetooth earbuds, LED lights, travel adapters, laptop sleeves, and power strips.",
+    "mapUrl": "https://maps.app.goo.gl/jkmDRQJWwcp89tRp7",
+    "lat": 52.21644010083079, 
+    "lng": 6.902336575641208
+  },
+  {
+    "category": "secondhand",
+    "mapCategory": "♻️ Second-hand",
+    "name": "Kringloopwinkel RataPlan Enschede",
+    "image": "Places/Kringloopwinkel.jpg",
+    "description": "RataPlan is one of the well-known sustainable second-hand chains in the Netherlands. Their Enschede store features a spacious layout filled with gently used furniture, clothing, books, homeware, and small electronics at low prices. It also supports social employment by offering work opportunities to people distanced from the labor market.",
+    "mapUrl": "https://maps.app.goo.gl/a8xbngrdQp4u2ytA8",
+    "lat": 52.21796,
+    "lng": 6.89956
+  },
+  {
+    "category": "secondhand",
+    "mapCategory": "♻️ Second-hand",
+    "name": "Kringloop Enschede – Multiple Locations",
+    "image": "Places/Kringloop.jpg",
+    "description": "Enschede hosts several kringloop (thrift) stores across the city, offering an ever-changing inventory of donated goods. These shops typically stock used furniture, clothing, toys, books, kitchenware, and bicycles at affordable prices. Shopping second-hand here is both budget-friendly and environmentally responsible.",
+    "mapUrl": "https://maps.app.goo.gl/rX8gUHiz389ELZn59",
+    "lat": 52.21929071742184, 
+    "lng": 6.883278078497679
+  },
+  {
+    "category": "bikes",
+    "mapCategory": "🚲 Bikes",
+    "name": "Decathlon – Bikes & Outdoor Sports",
+    "image": "Places/Decathlon.jpg",
+    "description": "Decathlon is a popular sporting goods chain that offers a wide range of affordable bicycles, gear, and accessories. Whether you're looking for city bikes, mountain bikes, foldable models, or electric bikes, Decathlon provides great value for students and commuters. Basic repair services are also available.",
+    "mapUrl": "https://maps.app.goo.gl/LAFBQT8dmCMLd5mw8",
+    "lat": 52.2167,
+    "lng": 6.8880
+  },
+  {
+    "category": "bikes",
+    "mapCategory": "🚲 Bikes",
+    "name": "La Souris – Scooters & E-Bikes",
+    "image": "Places/La Souris.jpg",
+    "description": "La Souris is a nationwide scooter and e-bike retailer with a branch in Enschede. They offer stylish electric scooters, electric bicycles, and traditional bikes, along with financing and warranty services. Repairs and spare parts are handled on-site.",
+    "mapUrl": "https://maps.app.goo.gl/RtdN6kSx6qSbz2Z38",
+    "lat": 52.2190,
+    "lng": 6.8930
+  },
+  {
+    "category": "bikes",
+    "mapCategory": "🚲 Bikes",
+    "name": "Bike Supply – Sales & Repairs",
+    "image": "Places/Bikesupply.jpg",
+    "description": "Bike Supply is a local bike shop offering a wide selection of new bicycles, ranging from basic city bikes to e-bikes and cargo options. They also specialize in repair services such as brake adjustments, flat tire fixes, and chain replacements. Accessories like locks, baskets, and lighting kits are also available.",
+    "mapUrl": "https://maps.app.goo.gl/yhCPxbxLnQXkH4KY8",
+    "lat": 52.2434,
+    "lng": 6.8379
+  },
+  {
+    "category": "barbers",
+    "mapCategory": "💇 Barbers",
+    "name": "Ghanahouse – Barber & Grooming",
+    "image": "Places/Ghanahouse.jpg",
+    "description": "Ghanahouse is a locally known grooming spot in Enschede offering stylish haircuts, clean fades, and beard trims at student-friendly prices. Popular among international students, this barbershop caters especially well to African hairstyles and textured hair.",
+    "mapUrl": "https://maps.app.goo.gl/de5TH8RfNiknMtXe9",
+    "lat": 52.2210,
+    "lng": 6.8920
+  },
+  {
+    "category": "barbers",
+    "mapCategory": "💇 Barbers",
+    "name": "FA YI Hair Salon – Unisex Styling",
+    "image": "Places/FA.jpg",
+    "description": "FA YI Hair Salon offers affordable grooming for both men and women, with services ranging from haircuts to styling and beard grooming. It is a preferred spot for those who want precise, clean looks including skin fades, straight cuts, and traditional styles.",
+    "mapUrl": "https://maps.app.goo.gl/iLYBTcB8C8kFnhdv8",
+    "lat": 52.2200,
+    "lng": 6.8935
+  },
+  {
+    "category": "barbers",
+    "mapCategory": "💇 Barbers",
+    "name": "AMI Kappers Enschede – Hair Salon",
+    "image": "Places/AMI.jpg",
+    "description": "AMI Kappers is a modern hair salon located in the city center, offering haircuts, coloring, styling, and grooming for all hair types. It's part of a reputable Dutch chain known for stylish cuts and professional haircare products.",
+    "mapUrl": "https://maps.app.goo.gl/oqMQftp1fHeBiEkg7",
+    "lat": 52.2195,
+    "lng": 6.8948
+  },
+  {
+    "category": "barbers",
+    "mapCategory": "💇 Barbers",
+    "name": "Student Salons – University of Twente",
+    "image": "Places/UT.jpg",
+    "description": "Located near the Sports Centre at the University of Twente, this student-run hair salon is a convenient and affordable option for students living on or near campus. The salon requires an appointment and offers basic haircuts, trims, and grooming at subsidized prices.",
+    "mapUrl": "https://maps.app.goo.gl/spUMpE42HJe8HvUs6",
+    "lat": 52.2395,
+    "lng": 6.8503
+  },
+  {
+    "category": "cafes",
+    "mapCategory": "☕ Study Cafés",
+    "name": "Bagels & Beans",
+    "image": "Places/Bagels.jpg",
+    "description": "Bagels & Beans is a warm and inviting café that offers a great selection of fresh bagels, healthy juices, and top-notch coffee. Known for its cozy ambiance, soft lighting, and mellow background music. Free Wi-Fi and comfortable seating make it a student favorite for working on laptops.",
+    "mapUrl": "https://maps.app.goo.gl/LNN9Vw4KRJt96j5j7",
+    "lat": 52.2202,
+    "lng": 6.8958
+  },
+  {
+    "category": "cafes",
+    "mapCategory": "☕ Study Cafés",
+    "name": "Coffee Fellows",
+    "image": "Places/Coffee_Fellows.jpg",
+    "description": "Located in the heart of Enschede, Coffee Fellows is a well-known chain café offering a modern environment with excellent coffee, bagels, snacks, and strong Wi-Fi. With plenty of seating and power outlets, it's a reliable option for long study sessions or casual group work.",
+    "mapUrl": "https://maps.app.goo.gl/XZQpojMh1a686QgdA",
+    "lat": 52.2195,
+    "lng": 6.8963
+  },
+  {
+    "category": "cafes",
+    "mapCategory": "☕ Study Cafés",
+    "name": "Bibliotheek Enschede – Study Space",
+    "image": "Places/Bibliotheek.jpg",
+    "description": "The central public library in Enschede provides a peaceful and well-equipped space for students looking for quiet study zones. It includes reading areas, individual study desks, internet access, and computer terminals. Membership also offers access to e-books and academic resources.",
+    "mapUrl": "https://maps.app.goo.gl/EQvgjrvZiSbke2cDA",
+    "lat": 52.2201,
+    "lng": 6.8965
+  },
+  {
+    "category": "cafes",
+    "mapCategory": "☕ Study Cafés",
+    "name": "Douwe Egberts Café",
+    "image": "Places/Douwe.jpg",
+    "description": "A cozy spot for coffee lovers, Douwe Egberts Café serves premium Dutch coffee along with cakes and light snacks. The ambiance is calm and inviting, making it a good place to take a break, read, or even do light studying.",
+    "mapUrl": "https://maps.app.goo.gl/wBGcPMfH1r1ex9e66",
+    "lat": 52.2200,
+    "lng": 6.8955
+  },
+  {
+    "category": "cafes",
+    "mapCategory": "☕ Study Cafés",
+    "name": "Van der Poel – Artisan Ice Cream",
+    "image": "Places/Van.jpg",
+    "description": "Van der Poel is widely considered the best ice cream shop in Enschede. While not a study café, it's an excellent chill spot to unwind after a long day. The shop offers artisanal gelato in a variety of unique flavors, made fresh daily.",
+    "mapUrl": "https://maps.app.goo.gl/s3uSqaV8GWeKLmMc8",
+    "lat": 52.2193,
+    "lng": 6.8952
+  },
+  {
+    "category": "prayer",
+    "mapCategory": "🕌 Prayer Places",
+    "name": "Enschede Mosque – Ulu Camii",
+    "image": "Places/IVU.jpg",
+    "description": "Ulu Camii is one of the largest mosques in Enschede, located near Volkspark. It serves the Moroccan-Turkish community and is open for all five daily prayers as well as Friday (Jummah) prayers. The mosque features a clean and spacious prayer hall and a designated area for women.",
+    "mapUrl": "https://maps.app.goo.gl/wRMiJovkyg8nszWB8",
+    "lat": 52.2225,
+    "lng": 6.8899
+  },
+  {
+    "category": "prayer",
+    "mapCategory": "🕌 Prayer Places",
+    "name": "Grote Kerk – Protestant Church",
+    "image": "Places/Grote.jpg",
+    "description": "Located at the heart of Enschede's old market square, Grote Kerk is a historic Protestant church known for its welcoming atmosphere and impressive architecture. Regular Sunday services are held in Dutch, and the church often hosts cultural events, concerts, and exhibitions.",
+    "mapUrl": "https://maps.app.goo.gl/srq6B8m3eU6LRnU9A",
+    "lat": 52.2190,
+    "lng": 6.8955
+  },
+  {
+    "category": "restaurants",
+    "mapCategory": "🍛 Intl. Restaurants",
+    "name": "Happy Italy",
+    "image": "Places/Italy.jpg",
+    "description": "A casual Italian eatery with generous portions of pasta, pizzas, and salads at student-friendly prices. Ideal for quick lunches or group dinners, Happy Italy offers a vibrant ambiance and quick service for dine-in or takeaway.",
+    "mapUrl": "https://maps.app.goo.gl/RaJL9SimzGHxFqZbA",
+    "lat": 52.2206,
+    "lng": 6.8910
+  },
+  {
+    "category": "restaurants",
+    "mapCategory": "🍛 Intl. Restaurants",
+    "name": "Damascus Restaurant",
+    "image": "Places/Damascus.jpg",
+    "description": "Known for authentic Syrian cuisine, Damascus offers delicious shawarma, falafel, hummus, kebabs, and Arabic sweets. It's a cozy, affordable restaurant ideal for trying rich Middle Eastern flavors with Halal options.",
+    "mapUrl": "https://maps.app.goo.gl/2jNGKDM59fk6EhVQ9",
+    "lat": 52.2210,
+    "lng": 6.8925
+  },
+  {
+    "category": "restaurants",
+    "mapCategory": "🍛 Intl. Restaurants",
+    "name": "Doner Max",
+    "image": "Places/Donermax.jpg",
+    "description": "A popular spot for Turkish-style doner, falafel wraps, dürüms, and grilled meat plates. Everything here is Halal-certified and budget-friendly, making it a favorite for quick, filling meals.",
+    "mapUrl": "https://maps.app.goo.gl/Zmvy1urfy3D7tt8e8",
+    "lat": 52.2204,
+    "lng": 6.8918
+  },
+  {
+    "category": "restaurants",
+    "mapCategory": "🍛 Intl. Restaurants",
+    "name": "Indian Summer",
+    "image": "Places/Indian_summer.jpg",
+    "description": "Specializing in North Indian cuisine, Indian Summer serves flavorful curries, naan, biryanis, and tandoori dishes. The interior is cozy and welcoming, perfect for group dinners and spicy comfort food.",
+    "mapUrl": "https://maps.app.goo.gl/hBTJFkXbsYcVafU56",
+    "lat": 52.2197,
+    "lng": 6.8943
+  },
+  {
+    "category": "restaurants",
+    "mapCategory": "🍛 Intl. Restaurants",
+    "name": "Light of India",
+    "image": "Places/Light.jpg",
+    "description": "Offering authentic Indian cuisine, Light of India features rich curries, vegetarian thalis, and freshly baked bread in a homely setting. Friendly service and a diverse menu make it a go-to for Indian food lovers.",
+    "mapUrl": "https://maps.app.goo.gl/hmkBEMBVQwJTLaiV6",
+    "lat": 52.2208,
+    "lng": 6.8932
+  },
+  {
+    "category": "restaurants",
+    "mapCategory": "🍛 Intl. Restaurants",
+    "name": "Crispy Chicken",
+    "image": "Places/Crispy.jpg",
+    "description": "A fast-food-style restaurant serving Turkish and Middle Eastern-style fried chicken, shawarma, burgers, and wraps. All items are Halal, and portions are generous — perfect for a casual meal or late-night craving.",
+    "mapUrl": "https://maps.app.goo.gl/XVmsiPSBoGGzynrS7",
+    "lat": 52.2202,
+    "lng": 6.8940
+  },
+  {
+    "category": "restaurants",
+    "mapCategory": "🍛 Intl. Restaurants",
+    "name": "Domino's Pizza",
+    "image": "Places/Domino.jpg",
+    "description": "One of the most recognizable pizza chains worldwide, Domino's offers customizable pizzas, cheesy bread, and chicken sides. This location is popular with students for its quick delivery and regular deals.",
+    "mapUrl": "https://maps.app.goo.gl/4qqy9ikTL31tAKn26",
+    "lat": 52.2165,
+    "lng": 6.8935
+  },
+  {
+    "category": "restaurants",
+    "mapCategory": "🍛 Intl. Restaurants",
+    "name": "KFC",
+    "image": "Places/KFC.jpg",
+    "description": "Globally known for its crispy fried chicken, KFC in Enschede offers the classic buckets, sandwiches, wraps, and sides. With quick service and combo meals, it's a convenient option for a fast and filling bite.",
+    "mapUrl": "https://maps.app.goo.gl/4qqy9ikTL31tAKn26",
+    "lat": 52.2170,
+    "lng": 6.8928
+  },
+  {
+    "category": "parks",
+    "mapCategory": "🌳 Parks",
+    "name": "Volkspark",
+    "image": "Places/Volkspark.jpg",
+    "description": "Located near the city center, Volkspark is one of Enschede's most popular parks. It features large open lawns, shaded walking paths, playgrounds, a small pond, and barbecue areas perfect for group outings or solo relaxation.",
+    "mapUrl": "https://maps.app.goo.gl/on2odvoRJR2rrfEy9",
+    "lat": 52.2156,
+    "lng": 6.8734
+  },
+  {
+    "category": "parks",
+    "mapCategory": "🌳 Parks",
+    "name": "Wooldrikspark",
+    "image": "Places/Wooldrik.jpg",
+    "description": "Wooldrikspark is a peaceful urban park offering a modern and artistic touch to nature. With well-maintained walking trails, small streams, grassy zones, and some public art installations, it provides a great backdrop for studying, meditating, or casual get-togethers.",
+    "mapUrl": "https://maps.app.goo.gl/Ac9iXxezs8jHcwHR9",
+    "lat": 52.2140,
+    "lng": 6.8760
+  },
+  {
+    "category": "parks",
+    "mapCategory": "🌳 Parks",
+    "name": "Rutbeek Recreatiepark",
+    "image": "Places/Rutbeek.jpg",
+    "description": "A large recreational lake on the outskirts of Enschede, Rutbeek offers swimming, sunbathing, picnicking, and water sports. With clean beaches, designated BBQ spots, walking trails, and ample grassy areas, it's ideal for both relaxing weekends and adventurous outings.",
+    "mapUrl": "https://maps.app.goo.gl/3qV1CdGEG3D6rddU7",
+    "lat": 52.2300,
+    "lng": 6.8650
+  },
+  {
+    "category": "libraries",
+    "mapCategory": "📚 Libraries",
+    "name": "Bibliotheek Enschede",
+    "image": "Places/Bibliotheek.jpg",
+    "description": "The main public library in Enschede offers calm and modern spaces for studying, reading, or working. With free Wi-Fi, comfortable desks, and quiet zones, it's perfect for students and remote workers. The building also houses digital services, Dutch language resources, and community events.",
+    "mapUrl": "https://maps.app.goo.gl/EQvgjrvZiSbke2cDA",
+    "lat": 52.2201,
+    "lng": 6.8965
+  },
+  {
+    "category": "libraries",
+    "mapCategory": "📚 Libraries",
+    "name": "Vrijhof – UT Library",
+    "image": "Places/Vrijhof.jpg",
+    "description": "Located on the University of Twente campus, Vrijhof offers silent study rooms, individual desks, and collaborative zones. Silent study areas must be reserved online in advance, but many desks are open for walk-ins. It's a preferred choice for students needing a focused academic environment.",
+    "mapUrl": "https://maps.app.goo.gl/aj9beEQEWahLM4f17",
+    "lat": 52.2390,
+    "lng": 6.8540
+  },
+  {
+    "category": "games",
+    "mapCategory": "🕹️ Gaming Zones",
+    "name": "Game Box Enschede",
+    "image": "Places/Gamebox.jpg",
+    "description": "A vibrant arcade space in the heart of the city, Game Box offers classic and modern arcade games, air hockey, VR, racing simulators, and more. Great for casual gaming or fun nights with friends, it combines nostalgia with a high-energy vibe, perfect for a quick break or group hangout.",
+    "mapUrl": "https://maps.app.goo.gl/q1NP4yyTWEwpkN916",
+    "lat": 52.2190,
+    "lng": 6.8952
+  }
+]

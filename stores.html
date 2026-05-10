@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Affordable Stores in Enschede | Orbit UTwente</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    h1, h2, h3, h4, h5, h6,
+    .font-extrabold, .font-bold, .font-semibold {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .highlighted {
+      background-color: #fef08a;
+      transition: background-color 1s ease;
+    }
+
+    #map {
+      min-height: 400px;
+    }
+
+    /* Navbar */
+    .navbar-blur {
+      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.97);
+    }
+
+    /* Store card hover */
+    .store-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .store-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.13);
+    }
+
+    .store-card>img {
+      transition: transform 0.4s ease;
+    }
+
+    .store-card:hover>img {
+      transform: scale(1.06);
+    }
+
+    /* Category pill buttons */
+    .cat-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 14px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+      text-decoration: none;
+    }
+
+    .cat-pill:hover,
+    .cat-pill.active {
+      background: #1d4ed8;
+      color: white;
+      border-color: #1d4ed8;
+    }
+
+    /* Hero gradient */
+    .stores-hero {
+      background-image: url('Thumbnails/Background.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stores-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.52);
+      z-index: 0;
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.2;
+      pointer-events: none;
+    }
+
+    /* Section headings */
+    .section-heading {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #111827;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-heading::after {
+      content: '';
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(90deg, #dbeafe, transparent);
+      border-radius: 1px;
+    }
+
+    .section-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #3b82f6, #6366f1);
+      color: white;
+      padding: 4px 16px;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* Dropdown visibility */
+    .nav-dropdown { display: none; }
+    .group:hover .nav-dropdown { display: block; }
+
+    /* Chevron rotation */
+    .group:hover .chevron { transform: rotate(180deg); }
+    .chevron { transition: transform 0.25s ease; }
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+
+</head>
+
+<body class="bg-gray-50 text-gray-800" x-data="{ menuOpen: false }">
+
+  <!-- ═══════════════════════ NAVBAR ═══════════════════════ -->
+  <header class="navbar-blur shadow-sm sticky top-0 z-30 border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
+
+      <!-- Brand -->
+      <div class="flex items-center gap-3">
+        <img src="logo.png" alt="Orbit Logo" class="w-10 h-10 rounded-full object-cover ring-2 ring-blue-100">
+        <div class="leading-tight">
+          <div class="font-extrabold text-gray-900 text-lg tracking-tight">Orbit ITC</div>
+          <div class="text-xs text-gray-400">University of Twente</div>
+        </div>
+      </div>
+
+      <!-- Mobile burger -->
+      <button @click="menuOpen = !menuOpen" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
+        <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+
+      <!-- Desktop nav -->
+      <nav class="hidden md:flex items-center gap-1">
+        <a href="index.html#intro" class="font-semibold text-sm text-gray-700 hover:text-blue-600 px-3 py-2 rounded-lg hover:bg-blue-50 transition-colors">About</a>
+        <a href="index.html#events" class="font-semibold text-sm text-gray-700 hover:text-blue-600 px-3 py-2 rounded-lg hover:bg-blue-50 transition-colors">Events</a>
+        <a href="index.html#board" class="font-semibold text-sm text-gray-700 hover:text-blue-600 px-3 py-2 rounded-lg hover:bg-blue-50 transition-colors">Board</a>
+        <a href="index.html#contact" class="font-semibold text-sm text-gray-700 hover:text-blue-600 px-3 py-2 rounded-lg hover:bg-blue-50 transition-colors">Contact Us</a>
+        <!-- Previous Boards dropdown -->
+        <div class="relative group">
+          <button class="flex items-center gap-1 font-semibold text-sm text-gray-700 hover:text-blue-600 px-3 py-2 rounded-lg hover:bg-blue-50 transition-colors">
+            Previous Boards
+            <svg class="w-3.5 h-3.5 chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="nav-dropdown absolute left-0 bg-white shadow-xl rounded-xl mt-1 py-2 z-50 min-w-max border border-gray-100">
+            <a href="https://orbit-itc.github.io/2025/" target="_blank"
+              class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors whitespace-nowrap">
+              2024–2025 Board
+              <svg class="w-3 h-3 text-gray-400 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+          </div>
+        </div>
+        <a href="stores.html" class="ml-2 bg-blue-600 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors shadow-sm">
+          Student Places
+        </a>
+      </nav>
+    </div>
+
+    <!-- Mobile menu -->
+    <div x-show="menuOpen" x-transition class="md:hidden bg-white border-t border-gray-100 px-6 py-4 space-y-1">
+      <a href="index.html#intro" @click="menuOpen=false" class="block py-2.5 text-gray-700 hover:text-blue-600 border-b border-gray-50 text-sm">About</a>
+      <a href="index.html#events" @click="menuOpen=false" class="block py-2.5 text-gray-700 hover:text-blue-600 border-b border-gray-50 text-sm">Events</a>
+      <a href="index.html#board" @click="menuOpen=false" class="block py-2.5 text-gray-700 hover:text-blue-600 border-b border-gray-50 text-sm">Board</a>
+      <a href="index.html#contact" @click="menuOpen=false" class="block py-2.5 text-gray-700 hover:text-blue-600 border-b border-gray-50 text-sm">Contact Us</a>
+      <a href="https://orbit-itc.github.io/2025/" target="_blank" class="block py-2.5 text-gray-700 hover:text-blue-600 border-b border-gray-50 text-sm">
+        Previous Boards - 2024–2025 ↗
+      </a>
+      <div class="pt-3">
+        <a href="index.html" class="block bg-blue-600 text-white text-center py-2.5 rounded-lg font-semibold text-sm">← Back to Orbit</a>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Hero Section -->
+  <header class="stores-hero text-white py-20 text-center">
+    <div class="max-w-3xl mx-auto px-6 relative z-10">
+      <span class="section-badge mb-5" style="background: rgba(255,255,255,0.18); backdrop-filter: blur(6px);">
+        Orbit · Enschede Guide
+      </span>
+      <h2 class="text-4xl md:text-5xl font-extrabold mb-4 leading-tight mt-5">
+        Student Places of Interest<br>in Enschede
+      </h2>
+      <p class="text-gray-200 text-lg">
+        Helping international students navigate the city smartly - curated by Orbit Student Association
+      </p>
+    </div>
+  </header>
+
+
+  <!-- Smart Search with Suggestions -->
+  <div class="bg-white py-4 px-4 shadow sticky top-[112px] z-20" x-data="smartSearch()" @click.outside="show = false">
+    <div class="max-w-4xl mx-auto relative">
+      <div class="flex gap-2">
+        <input type="text" x-model="query" @input="updateSuggestions" @keydown.enter.prevent="goToFirstMatch"
+          placeholder="Search stores, categories, items..."
+          class="w-full border border-gray-300 rounded-lg px-4 py-2" />
+        <button @click="clearSearch" class="bg-gray-200 px-3 py-2 rounded hover:bg-gray-300">Clear</button>
+      </div>
+
+      <ul x-show="show && suggestions.length"
+        class="absolute left-0 right-0 bg-white border mt-1 rounded shadow max-h-60 overflow-y-auto z-50">
+        <template x-for="(result, index) in suggestions" :key="index">
+          <li>
+            <button @click="scrollTo(result.el)" class="w-full text-left px-4 py-2 hover:bg-blue-100"
+              x-text="result.text"></button>
+          </li>
+        </template>
+      </ul>
+    </div>
+  </div>
+  <!-- Category Filter + Main Layout Wrapper -->
+  <div x-data="mapApp" x-init="initMap()">
+
+    <!-- Filter Bar -->
+    <div class="bg-white border-b border-gray-100 py-3 px-4 shadow-sm">
+      <div class="max-w-7xl mx-auto flex flex-wrap gap-2 justify-center">
+        <button @click="setCategory('all')" :class="{ 'active': selectedCategory === 'all' }" class="cat-pill">All</button>
+        <button @click="setCategory('groceries')" :class="{ 'active': selectedCategory === 'groceries' }" class="cat-pill">🛒 Groceries</button>
+        <button @click="setCategory('home')" :class="{ 'active': selectedCategory === 'home' }" class="cat-pill">🏠 Home Supplies</button>
+        <button @click="setCategory('clothing')" :class="{ 'active': selectedCategory === 'clothing' }" class="cat-pill">👕 Clothing</button>
+        <button @click="setCategory('pharmacy')" :class="{ 'active': selectedCategory === 'pharmacy' }" class="cat-pill">🧼 Pharmacy</button>
+        <button @click="setCategory('electronics')" :class="{ 'active': selectedCategory === 'electronics' }" class="cat-pill">💻 Electronics</button>
+        <button @click="setCategory('secondhand')" :class="{ 'active': selectedCategory === 'secondhand' }" class="cat-pill">♻️ Second-hand</button>
+        <button @click="setCategory('bikes')" :class="{ 'active': selectedCategory === 'bikes' }" class="cat-pill">🚲 Bikes</button>
+        <button @click="setCategory('barbers')" :class="{ 'active': selectedCategory === 'barbers' }" class="cat-pill">💇 Barbers</button>
+        <button @click="setCategory('cafes')" :class="{ 'active': selectedCategory === 'cafes' }" class="cat-pill">☕ Study Cafés</button>
+        <button @click="setCategory('prayer')" :class="{ 'active': selectedCategory === 'prayer' }" class="cat-pill">🕌 Prayer Places</button>
+        <button @click="setCategory('restaurants')" :class="{ 'active': selectedCategory === 'restaurants' }" class="cat-pill">🍛 Restaurants</button>
+        <button @click="setCategory('parks')" :class="{ 'active': selectedCategory === 'parks' }" class="cat-pill">🌳 Parks</button>
+        <button @click="setCategory('libraries')" :class="{ 'active': selectedCategory === 'libraries' }" class="cat-pill">📚 Libraries</button>
+        <button @click="setCategory('games')" :class="{ 'active': selectedCategory === 'games' }" class="cat-pill">🕹️ Gaming</button>
+      </div>
+    </div>
+
+    <!-- Store Listings + Sticky Map Layout -->
+    <div class="max-w-7xl mx-auto px-4 py-8 flex gap-8 items-start">
+
+    <!-- LEFT: Scrollable store list -->
+    <div class="flex-1 min-w-0" data-storelist style="max-height: calc(100vh - 72px); overflow-y: auto; padding-right: 6px; scroll-behavior: smooth;">
+      <section id="stores" class="space-y-12 py-4">
+        <template x-if="stores.length === 0">
+          <div class="flex items-center justify-center py-20 text-gray-400 text-lg">Loading places…</div>
+        </template>
+        <template x-for="cat in activeCategories()" :key="cat">
+          <div :id="cat">
+            <h3 class="section-heading" x-text="categoryLabels[cat]"></h3>
+            <div class="grid md:grid-cols-2 gap-8">
+              <template x-for="store in storesByCategory(cat)" :key="store.name">
+                <div class="store-card bg-white rounded-xl shadow-md overflow-hidden"
+                     :class="store.lat ? 'cursor-pointer' : ''"
+                     @click="focusStore(store)">
+                  <img :src="store.image" :alt="store.name" class="w-full h-56 object-cover">
+                  <div class="p-6">
+                    <h4 class="text-xl font-bold mb-2" x-text="store.name"></h4>
+                    <p class="mb-3 text-sm text-gray-600 leading-relaxed" style="text-align:justify;" x-text="store.description"></p>
+                    <div>
+                      <a :href="store.mapUrl" target="_blank" @click.stop class="text-blue-500 hover:underline text-sm font-medium"> View on Google Maps</a>
+                    </div>
+                  </div>
+                </div>
+              </template>
+            </div>
+          </div>
+        </template>
+      </section>
+    </div><!-- end scrollable list -->
+
+    <!-- RIGHT: Sticky map -->
+    <div class="hidden lg:block flex-shrink-0 sticky top-[72px]" style="width: 420px;">
+      <div class="py-4">
+        <h3 class="text-lg font-bold mb-3 text-gray-900">📍 Enschede Map</h3>
+        <div id="map" class="rounded-xl shadow-lg border border-gray-100" style="height: calc(100vh - 160px);"></div>
+      </div>
+    </div>
+
+  </div><!-- end flex layout -->
+  </div><!-- end mapApp wrapper -->
+
+  <section id="contact" class="py-20 relative" style="background-image: url('Thumbnails/Background2.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+    <div class="absolute inset-0" style="background: rgba(0,0,0,0.55); z-index:0;"></div>
+    <div class="max-w-4xl mx-auto px-6 text-center text-white relative z-10">
+      <span class="section-badge mb-5" style="background: rgba(255,255,255,0.18); backdrop-filter: blur(6px);">Get in Touch</span>
+      <h2 class="text-4xl font-extrabold mt-4 mb-4">Contact Us</h2>
+      <p class="text-blue-200 mb-10 text-lg max-w-lg mx-auto">
+        Have questions or want to get involved? We'd love to hear from you.
+      </p>
+      <a href="mailto:sab-itc@utwente.nl"
+        class="inline-flex items-center gap-3 bg-white text-blue-900 font-bold px-8 py-4 rounded-full hover:bg-blue-50 transition-colors shadow-xl text-lg">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+        sab-itc@utwente.nl
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-900 text-gray-400 py-10">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="flex items-center gap-3">
+          <img src="logo.png" alt="Orbit Logo" class="w-10 h-10 rounded-full object-cover opacity-70">
+          <div>
+            <div class="font-bold text-white">Orbit Student Association</div>
+            <div class="text-xs">ITC · University of Twente</div>
+          </div>
+        </div>
+        <div class="flex flex-wrap justify-center gap-6 text-sm">
+          <a href="index.html#intro" class="hover:text-white transition-colors">About</a>
+          <a href="index.html#events" class="hover:text-white transition-colors">Events</a>
+          <a href="index.html#board" class="hover:text-white transition-colors">Board</a>
+          <a href="index.html#contact" class="hover:text-white transition-colors">Contact</a>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 mt-8 pt-6 text-center text-xs">
+        &copy; 2025 Orbit Student Association · University of Twente 
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  function smartSearch() {
+    return {
+      query: '',
+      suggestions: [],
+      show: false,
+      updateSuggestions() {
+        const term = this.query.toLowerCase();
+        if (!term) {
+          this.suggestions = [];
+          this.show = false;
+          return;
+        }
+        const elements = Array.from(document.querySelectorAll('#stores h3, #stores h4, #stores p'));
+        this.suggestions = elements
+          .filter(el => el.textContent.trim().toLowerCase().includes(term))
+          .map(el => ({ el, text: el.textContent.trim().slice(0, 80) }))
+          .slice(0, 10);
+        this.show = this.suggestions.length > 0;
+      },
+      scrollTo(el) {
+        this.clearHighlights();
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        el.classList.add("highlighted");
+        this.show = false;
+      },
+      clearSearch() {
+        this.query = '';
+        this.suggestions = [];
+        this.show = false;
+        this.clearHighlights();
+      },
+      goToFirstMatch() {
+        if (this.suggestions.length > 0) {
+          this.scrollTo(this.suggestions[0].el);
+        }
+      },
+      clearHighlights() {
+        document.querySelectorAll(".highlighted").forEach(el => {
+          el.classList.remove("highlighted");
+        });
+      }
+    };
+  }
+</script>
+
+<script>
+  document.addEventListener("alpine:init", () => {
+    Alpine.data("mapApp", () => ({
+      map: null,
+      allMarkers: [],
+      selectedCategory: 'all',
+      stores: [],
+
+      categoryLabels: {
+        'groceries':   '🛒 Groceries & Essentials',
+        'home':        '🏠 Home Supplies',
+        'clothing':    '👕 Clothing',
+        'pharmacy':    '🧼 Pharmacy & Health',
+        'electronics': '💻 Electronics',
+        'secondhand':  '♻️ Second-hand',
+        'bikes':       '🚲 Bikes',
+        'barbers':     '💇 Barbers & Salons',
+        'cafes':       '☕ Study Cafés',
+        'prayer':      '🕌 Prayer Places',
+        'restaurants': '🍛 International Restaurants',
+        'parks':       '🌳 Parks & Nature',
+        'libraries':   '📚 Libraries',
+        'games':       '🕹️ Gaming Zones & Hangouts',
+      },
+
+      activeCategories() {
+        const order = ['groceries','home','clothing','pharmacy','electronics','secondhand','bikes','barbers','cafes','prayer','restaurants','parks','libraries','games'];
+        if (this.selectedCategory === 'all') {
+          return order.filter(c => this.stores.some(s => s.category === c));
+        }
+        return [this.selectedCategory].filter(c => this.stores.some(s => s.category === c));
+      },
+
+      storesByCategory(cat) {
+        return this.stores.filter(s => s.category === cat);
+      },
+
+      setCategory(cat) {
+        this.selectedCategory = cat;
+        const listEl = document.querySelector('[data-storelist]');
+        if (listEl) listEl.scrollTop = 0;
+        if (this.map) this.updateMarkers();
+      },
+
+      async loadStores() {
+        const res = await fetch('places.json');
+        this.stores = await res.json();
+      },
+
+      async initMap() {
+        await this.loadStores();
+        setTimeout(() => {
+          this.map = L.map("map").setView([52.2215, 6.8937], 13);
+          L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
+          }).addTo(this.map);
+          this.addAllMarkers();
+        }, 200);
+      },
+
+      addAllMarkers() {
+        this.allMarkers = [];
+        const pinIcon = L.icon({
+          iconUrl: 'https://www.iconpacks.net/icons/2/free-location-pin-icon-2965-thumb.png',
+          iconSize: [36, 36],
+          iconAnchor: [18, 36],
+          popupAnchor: [0, -38]
+        });
+        for (const store of this.stores) {
+          if (!store.lat || !store.lng) continue;
+          const marker = L.marker([store.lat, store.lng], { icon: pinIcon })
+            .bindPopup(`<strong>${store.name}</strong><br><a href="${store.mapUrl}" target="_blank">📍 View on Map</a>`);
+          marker.categoryKey = store.category;
+          marker.storeName = store.name;
+          marker.addTo(this.map);
+          this.allMarkers.push(marker);
+        }
+      },
+
+      focusStore(store) {
+        if (!store.lat || !store.lng) return;
+        this.map.flyTo([store.lat, store.lng], 17, { duration: 1.2 });
+        const marker = this.allMarkers.find(m => m.storeName === store.name);
+        if (marker) setTimeout(() => marker.openPopup(), 1250);
+        document.getElementById('map').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      },
+
+      updateMarkers() {
+        this.allMarkers.forEach(marker => {
+          if (this.selectedCategory === 'all' || marker.categoryKey === this.selectedCategory) {
+            marker.addTo(this.map);
+          } else {
+            this.map.removeLayer(marker);
+          }
+        });
+      }
+    }));
+  });
+</script>
+
+
+</body>
+</html>

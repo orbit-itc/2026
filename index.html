@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Orbit Student Association | ITC</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css' rel='stylesheet' />
+  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    h1, h2, h3, h4, h5, h6,
+    .font-extrabold, .font-bold, .font-semibold {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .hero-gradient {
+      background-image: url('Thumbnails/Background.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-gradient::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.52);
+      z-index: 0;
+    }
+
+    .section-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #3b82f6, #6366f1);
+      color: white;
+      padding: 4px 16px;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .navbar-blur {
+      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.97);
+    }
+
+    /* Event card hover */
+    .event-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .event-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.13);
+    }
+
+    .event-card .card-img img {
+      transition: transform 0.45s ease;
+    }
+
+    .event-card:hover .card-img img {
+      transform: scale(1.08);
+    }
+
+    /* Board card hover */
+    .board-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .board-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12);
+    }
+
+    /* Perk list items */
+    .perk-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 9px 0;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .perk-item:last-child {
+      border-bottom: none;
+    }
+
+    /* Dropdown */
+    .dropdown-menu {
+      min-width: 185px;
+    }
+
+    /* Hero entrance animation */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(28px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .anim-1 {
+      animation: fadeUp 0.7s ease both;
+    }
+
+    .anim-2 {
+      animation: fadeUp 0.7s 0.18s ease both;
+    }
+
+    .anim-3 {
+      animation: fadeUp 0.7s 0.36s ease both;
+    }
+
+    /* CTA button pulse */
+    @keyframes pulse-ring {
+      0% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.5);
+      }
+
+      70% {
+        box-shadow: 0 0 0 14px rgba(255, 255, 255, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+      }
+    }
+
+    .btn-pulse {
+      animation: pulse-ring 2.5s infinite;
+    }
+
+    /* Chevron rotation on dropdown open */
+    .group:hover .chevron {
+      transform: rotate(180deg);
+    }
+
+    .chevron {
+      transition: transform 0.25s ease;
+    }
+
+    /* Dropdown visibility */
+    .nav-dropdown {
+      display: none;
+    }
+
+    .group:hover .nav-dropdown {
+      display: block;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800" x-data="{ menuOpen: false }">
+
+  <!-- ═══════════════════════ NAVBAR ═══════════════════════ -->
+  <header class="navbar-blur shadow-sm sticky top-0 z-30 border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
+
+      <!-- Brand -->
+      <div class="flex items-center gap-3">
+        <img src="logo.png" alt="Orbit Logo" class="w-10 h-10 rounded-full object-cover ring-2 ring-blue-100">
+        <div class="leading-tight">
+          <div class="font-extrabold text-gray-900 text-lg tracking-tight">Orbit ITC</div>
+          <div class="text-xs text-gray-400">University of Twente</div>
+        </div>
+      </div>
+
+      <!-- Mobile burger -->
+      <button @click="menuOpen = !menuOpen" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
+        <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+
+      <!-- Desktop nav -->
+      <nav class="hidden md:flex items-center gap-1">
+        <a href="#intro"
+          class="font-semibold text-sm text-gray-700 hover:text-blue-600 px-3 py-2 rounded-lg hover:bg-blue-50 transition-colors">About</a>
+        <a href="#events"
+          class="font-semibold text-sm text-gray-700 hover:text-blue-600 px-3 py-2 rounded-lg hover:bg-blue-50 transition-colors">Events</a>
+
+        <a href="#board"
+          class="font-semibold text-sm text-gray-700 hover:text-blue-600 px-3 py-2 rounded-lg hover:bg-blue-50 transition-colors">Board</a>
+        <a href="#contact"
+          class="font-semibold text-sm text-gray-700 hover:text-blue-600 px-3 py-2 rounded-lg hover:bg-blue-50 transition-colors">Contact
+          Us</a>
+        <!-- Previous Boards dropdown -->
+        <div class="relative group">
+          <button
+            class="flex items-center gap-1 font-semibold text-sm text-gray-700 hover:text-blue-600 px-3 py-2 rounded-lg hover:bg-blue-50 transition-colors">
+            Previous Boards
+            <svg class="w-3.5 h-3.5 chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div
+            class="nav-dropdown absolute left-0 bg-white shadow-xl rounded-xl mt-1 py-2 z-50 min-w-max border border-gray-100">
+            <a href="https://orbit-itc.github.io/2025/" target="_blank"
+              class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors whitespace-nowrap">
+              2024–2025 Board
+              <svg class="w-3 h-3 text-gray-400 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+
+        <a href="stores.html"
+          class="ml-2 bg-blue-600 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors shadow-sm">
+          Student Places
+        </a>
+      </nav>
+    </div>
+
+    <!-- Mobile menu -->
+    <div x-show="menuOpen" x-transition class="md:hidden bg-white border-t border-gray-100 px-6 py-4 space-y-1">
+      <a href="#intro" @click="menuOpen=false"
+        class="block py-2.5 text-gray-700 hover:text-blue-600 border-b border-gray-50 text-sm">About</a>
+      <a href="#events" @click="menuOpen=false"
+        class="block py-2.5 text-gray-700 hover:text-blue-600 border-b border-gray-50 text-sm">Events</a>
+
+      <a href="#board" @click="menuOpen=false"
+        class="block py-2.5 text-gray-700 hover:text-blue-600 border-b border-gray-50 text-sm">Board</a>
+      <a href="#contact" @click="menuOpen=false" class="block py-2.5 text-gray-700 hover:text-blue-600 text-sm">Contact
+        Us</a>
+
+      <a href="https://github.com/orbit-itc/2025" target="_blank" @click="menuOpen=false"
+        class="block py-2.5 text-gray-700 hover:text-blue-600 border-b border-gray-50 text-sm">
+        Previous Boards - 2024–2025 ↗
+      </a>
+
+      <div class="pt-3">
+        <a href="stores.html" target="_blank"
+          class="block bg-blue-600 text-white text-center py-2.5 rounded-lg font-semibold text-sm">
+          Student Places →
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════ HERO ═══════════════════════ -->
+  <section class="hero-gradient text-white py-28 md:py-36">
+    <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+      <!-- Logo -->
+      <div class="flex justify-center mb-8 anim-1">
+        <img src="logo.png" alt="Orbit Logo" class="w-28 h-28 rounded-full object-cover shadow-2xl"
+          style="border: 4px solid rgba(255,255,255,0.35); background:#1e3a8a;">
+      </div>
+
+      <div class="anim-2">
+        <h1 class="text-5xl md:text-7xl font-extrabold mb-4 leading-tight tracking-tight">
+          Welcome to<br>
+          <span style="color:#fde68a;">Orbit</span>
+        </h1>
+        <p class="text-xl md:text-2xl font-light text-blue-100 mb-2">Student Association at ITC, University of Twente
+        </p>
+        <p class="text-blue-200 max-w-xl mx-auto mb-10 text-sm md:text-base">
+          Building community, celebrating diversity, and creating unforgettable memories - together.
+        </p>
+        <div class="flex flex-wrap gap-4 justify-center">
+          <a href="#intro"
+            class="btn-pulse bg-white text-blue-900 font-bold px-8 py-3.5 rounded-full hover:bg-blue-50 transition-all shadow-xl">
+            Discover Orbit
+          </a>
+          <a href="#membership"
+            class="font-semibold px-8 py-3.5 rounded-full transition-all hover:bg-white hover:bg-opacity-10"
+            style="border: 2px solid rgba(255,255,255,0.6); color:white;">
+            Join as Member
+          </a>
+        </div>
+      </div>
+
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ INTRO ═══════════════════════ -->
+  <section id="intro" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+      <div>
+        <span class="section-badge">Who We Are</span>
+        <h2 class="text-4xl font-extrabold mt-4 mb-6 text-gray-900 leading-tight">
+          Your Community<br>at ITC
+        </h2>
+        <p class="text-gray-600 leading-relaxed text-justify mb-5">
+          At ITC, University of Twente, where students from across the globe come together to pursue advanced studies in
+          geo-information science and earth observation, adapting to a new academic and cultural environment can be both
+          exciting and challenging. That's where Orbit steps in - not just as a student board, but as a bridge between
+          individuals, cultures, and experiences.
+        </p>
+        <p class="text-gray-600 leading-relaxed text-justify">
+          Founded with the belief that a sense of belonging is essential for academic and personal growth, Orbit is a
+          student-led association committed to creating a supportive and inclusive space for all ITC students. We
+          organize everything from academic workshops and career talks to cultural festivals and social events. Orbit is
+          more than a committee; it's a community built by students, for students - a place where every voice matters.
+        </p>
+        <div class="mt-8 flex gap-8">
+          <div class="text-center">
+            <div class="text-xl font-bold text-blue-600">Inclusive</div>
+            <div class="text-xs text-gray-400 mt-0.5">For all students</div>
+          </div>
+          <div class="w-px bg-gray-200"></div>
+          <div class="text-center">
+            <div class="text-xl font-bold text-blue-600">Student-led</div>
+            <div class="text-xs text-gray-400 mt-0.5">By students</div>
+          </div>
+          <div class="w-px bg-gray-200"></div>
+          <div class="text-center">
+            <div class="text-xl font-bold text-blue-600">Empowering</div>
+            <div class="text-xs text-gray-400 mt-0.5">Your journey</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-center">
+        <div class="relative">
+          <div class="w-80 h-80 rounded-full flex items-center justify-center"
+            style="background: linear-gradient(135deg, #dbeafe, #e0e7ff);">
+            <img src="logo.png" alt="Orbit Logo" class="w-60 h-60 rounded-full object-cover shadow-xl">
+          </div>
+          <div
+            class="absolute -top-3 -right-3 bg-blue-600 text-white text-xs px-3 py-1.5 rounded-full font-bold shadow-lg">
+            Student-led</div>
+          <div
+            class="absolute -bottom-3 -left-3 bg-indigo-600 text-white text-xs px-3 py-1.5 rounded-full font-bold shadow-lg">
+            Inclusive ✓</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ EVENTS ═══════════════════════ -->
+  <section id="events" class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-14">
+        <span class="section-badge">Our Events</span>
+        <h2 class="text-4xl font-extrabold mt-4 text-gray-900">Orbit Events</h2>
+        <p class="text-gray-500 mt-2">Moments that bring us together</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <!-- Movie Night - January -->
+        <div class="event-card bg-white shadow-md rounded-2xl overflow-hidden">
+          <div class="card-img h-56 overflow-hidden">
+            <img src="Events/Movie Night.jpg" alt="Movie Night" class="w-full h-full object-cover">
+          </div>
+          <div class="p-6">
+            <div class="text-xs font-bold text-violet-500 uppercase tracking-wider mb-2">Social Event</div>
+            <h3 class="text-lg font-bold mb-2 text-gray-900">Movie Night</h3>
+            <p class="text-gray-500 text-sm text-justify leading-relaxed">A cozy evening of film screening in the ITC
+              lounge - snacks, laughter, and shared moments creating the perfect break from academic life.</p>
+          </div>
+        </div>
+
+        <!-- Valentine's Day - February -->
+        <div class="event-card bg-white shadow-md rounded-2xl overflow-hidden">
+          <div class="card-img h-56 overflow-hidden">
+            <img src="Events/valentines day.jpg" alt="Valentine's Day" class="w-full h-full object-cover">
+          </div>
+          <div class="p-6">
+            <div class="text-xs font-bold text-pink-500 uppercase tracking-wider mb-2">Social Event</div>
+            <h3 class="text-lg font-bold mb-2 text-gray-900">Valentine's Day / Platonic Valentine's</h3>
+            <p class="text-gray-500 text-sm text-justify leading-relaxed">From anonymous love notes to platonic
+              celebrations of friendship - the love could be felt throughout the entire ITC faculty on Valentine's Day.
+            </p>
+          </div>
+        </div>
+
+        <!-- Board Games Night - March -->
+        <div class="event-card bg-white shadow-md rounded-2xl overflow-hidden">
+          <div class="card-img h-56 overflow-hidden">
+            <img src="Events/Indoor games night.jpg" alt="Board Games Night" class="w-full h-full object-cover">
+          </div>
+          <div class="p-6">
+            <div class="text-xs font-bold text-indigo-500 uppercase tracking-wider mb-2">Social Event</div>
+            <h3 class="text-lg font-bold mb-2 text-gray-900">Board Games Night</h3>
+            <p class="text-gray-500 text-sm text-justify leading-relaxed">A fun-filled evening of board games, card
+              games, and friendly competition - the perfect way to unwind and bond with the ITC community.</p>
+          </div>
+        </div>
+
+        <!-- Lunch Lecture Series - April -->
+        <div class="event-card bg-white shadow-md rounded-2xl overflow-hidden">
+          <div class="card-img h-56 overflow-hidden">
+            <img src="Events/Lunch lecture Series.jpg" alt="Lunch Lecture Series" class="w-full h-full object-cover">
+          </div>
+          <div class="p-6">
+            <div class="text-xs font-bold text-cyan-600 uppercase tracking-wider mb-2">Academic Event</div>
+            <h3 class="text-lg font-bold mb-2 text-gray-900">Lunch Lecture Series</h3>
+            <p class="text-gray-500 text-sm text-justify leading-relaxed">Inspiring talks over lunch - bringing together
+              students and speakers to share knowledge, experiences, and ideas in a relaxed and engaging setting.</p>
+          </div>
+        </div>
+
+        <!-- Day Trip Giethoorn - April -->
+        <div class="event-card bg-white shadow-md rounded-2xl overflow-hidden">
+          <div class="card-img h-56 overflow-hidden">
+            <img src="Events/Giethoorn trip_2.jpg" alt="Giethoorn Trip" class="w-full h-full object-cover">
+          </div>
+          <div class="p-6">
+            <div class="text-xs font-bold text-teal-600 uppercase tracking-wider mb-2">Day Trip</div>
+            <h3 class="text-lg font-bold mb-2 text-gray-900">Day Trip - Giethoorn</h3>
+            <p class="text-gray-500 text-sm text-justify leading-relaxed">A memorable day trip to the picturesque
+              village of Giethoorn - canals, boats, and beautiful scenery shared with fellow ITC students.</p>
+          </div>
+        </div>
+
+        <!-- Spring in Keukenhof - April -->
+        <div class="event-card bg-white shadow-md rounded-2xl overflow-hidden">
+          <div class="card-img h-56 overflow-hidden">
+            <img src="Events/Spring_in_keukenhof.jpg" alt="Keukenhof" class="w-full h-full object-cover">
+          </div>
+          <div class="p-6">
+            <div class="text-xs font-bold text-green-600 uppercase tracking-wider mb-2">Day Trip</div>
+            <h3 class="text-lg font-bold mb-2 text-gray-900">Spring in Keukenhof</h3>
+            <p class="text-gray-500 text-sm text-justify leading-relaxed">A blooming day at Keukenhof surrounded by
+              tulips, sunshine, and laughter. From peaceful strolls to joyful group photos - a perfect escape into
+              nature.</p>
+          </div>
+        </div>
+
+        <!-- International Food Festival - May -->
+        <div class="event-card bg-white shadow-md rounded-2xl overflow-hidden">
+          <div class="card-img h-56 overflow-hidden">
+            <img src="Events/Food_festival.jpg" alt="Food Festival" class="w-full h-full object-cover">
+          </div>
+          <div class="p-6">
+            <div class="text-xs font-bold text-orange-500 uppercase tracking-wider mb-2">Cultural Event</div>
+            <h3 class="text-lg font-bold mb-2 text-gray-900">International Food Festival</h3>
+            <p class="text-gray-500 text-sm text-justify leading-relaxed">We traveled the world through flavors -
+              delicious homemade dishes from many different countries. A celebration of culture, connection, and shared
+              meals.</p>
+          </div>
+        </div>
+
+        <!-- ITC Sports Day - June -->
+        <div class="event-card bg-white shadow-md rounded-2xl overflow-hidden">
+          <div class="card-img h-56 overflow-hidden">
+            <img src="Events/Sports_day.jpg" alt="ITC Sports Day" class="w-full h-full object-cover">
+          </div>
+          <div class="p-6">
+            <div class="text-xs font-bold text-blue-500 uppercase tracking-wider mb-2">Sports Event</div>
+            <h3 class="text-lg font-bold mb-2 text-gray-900">ITC Sports Day</h3>
+            <p class="text-gray-500 text-sm text-justify leading-relaxed">Students and ITC staff came together for an
+              active and cheerful afternoon with soccer, volleyball, and more. A great chance to build team spirit.</p>
+          </div>
+        </div>
+
+
+        <!-- Welcome Party - September -->
+        <div class="event-card bg-white shadow-md rounded-2xl overflow-hidden">
+          <div class="card-img h-56 overflow-hidden">
+            <img src="Events/welcome_part.jpg" alt="Teacher of the Year" class="w-full h-full object-cover">
+          </div>
+          <div class="p-6">
+            <div class="text-xs font-bold text-purple-500 uppercase tracking-wider mb-2">Social Event</div>
+            <h3 class="text-lg font-bold mb-2 text-gray-900">Welcome Party</h3>
+            <p class="text-gray-500 text-sm text-justify leading-relaxed">A warm welcome to all new ITC
+              students! Music, drinks, and good vibes to kick off the academic year with energy and excitement.</p>
+          </div>
+        </div>
+
+
+
+        <!-- Trip Zaanse Schans/Haarlem/Munster - October -->
+        <div class="event-card bg-white shadow-md rounded-2xl overflow-hidden">
+          <div class="card-img h-56 overflow-hidden">
+            <img src="Events/Zaanse Schans.webp" alt="Teacher of the Year" class="w-full h-full object-cover">
+          </div>
+
+          <div class="p-6">
+            <div class="text-xs font-bold text-emerald-600 uppercase tracking-wider mb-2">Day Trip</div>
+            <h3 class="text-lg font-bold mb-2 text-gray-900">Trip - Zaanse Schans / Haarlem / Münster</h3>
+            <p class="text-gray-500 text-sm text-justify leading-relaxed">An exciting day out exploring iconic Dutch and
+              German destinations - windmills, charming streets, and unforgettable experiences with the ITC community.
+            </p>
+          </div>
+        </div>
+
+        <!-- Teacher of the Year -->
+        <div class="event-card bg-white shadow-md rounded-2xl overflow-hidden">
+          <div class="card-img h-56 overflow-hidden">
+            <img src="Events/Teachers_day.jpg" alt="Teacher of the Year" class="w-full h-full object-cover">
+          </div>
+          <div class="p-6">
+            <div class="text-xs font-bold text-yellow-600 uppercase tracking-wider mb-2">Recognition</div>
+            <h3 class="text-lg font-bold mb-2 text-gray-900">Teacher of the Year</h3>
+            <p class="text-gray-500 text-sm text-justify leading-relaxed">Congratulations to Lucas De Oto, Teacher of
+              the Year 2025! Orbit celebrates the educators who make a difference every day with passion and dedication.
+            </p>
+          </div>
+        </div>
+
+        <!-- International Evening - November -->
+        <div class="event-card bg-white shadow-md rounded-2xl overflow-hidden">
+
+          <div class="card-img h-56 overflow-hidden">
+            <img src="Events/International Evening.jpg" alt="Graduation" class="w-full h-full object-cover">
+
+          </div>
+          <div class="p-6">
+            <div class="text-xs font-bold text-indigo-600 uppercase tracking-wider mb-2">Cultural Event</div>
+            <h3 class="text-lg font-bold mb-2 text-gray-900">International Evening</h3>
+            <p class="text-gray-500 text-sm text-justify leading-relaxed">A vibrant celebration of ITC's global
+              community - cultural performances, traditional attire, music, and food from around the world all in one
+              evening.</p>
+          </div>
+        </div>
+
+
+        <!-- Christmas Market Trip - December -->
+        <div class="event-card bg-white shadow-md rounded-2xl overflow-hidden">
+
+          <div class="card-img h-56 overflow-hidden">
+            <img src="Events/chirstmas.png" alt="Graduation" class="w-full h-full object-cover">
+
+          </div>
+          <div class="p-6">
+            <div class="text-xs font-bold text-green-600 uppercase tracking-wider mb-2">Day Trip</div>
+            <h3 class="text-lg font-bold mb-2 text-gray-900">Christmas Market Trip</h3>
+            <p class="text-gray-500 text-sm text-justify leading-relaxed">Glühwein, twinkling lights, and festive cheer
+              - a magical trip to the Christmas markets bringing warmth and joy to the end of the semester.</p>
+          </div>
+        </div>
+
+
+        <!-- Graduation -->
+        <div class="event-card bg-white shadow-md rounded-2xl overflow-hidden">
+          <div class="card-img h-56 overflow-hidden">
+            <img src="Events/Graduation.jpg" alt="Graduation" class="w-full h-full object-cover">
+          </div>
+          <div class="p-6">
+            <div class="text-xs font-bold text-purple-600 uppercase tracking-wider mb-2">Milestone</div>
+            <h3 class="text-lg font-bold mb-2 text-gray-900">Graduation Day</h3>
+            <p class="text-gray-500 text-sm text-justify leading-relaxed">A proud moment honoring the graduating class.
+              With smiles, speeches, and caps in the air - marking a new beginning for our incredible ITC students.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ CALENDAR ═══════════════════════ -->
+  <section id="calendar" class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="text-center mb-10">
+        <span class="section-badge">Stay Updated</span>
+        <h2 class="text-4xl font-extrabold mt-4 text-gray-900">Events Calendar</h2>
+        <p class="text-gray-500 mt-2">Click on any event to learn more</p>
+      </div>
+      <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
+        <div id="orbit-calendar"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ FACILITIES ═══════════════════════ -->
+  <section id="facilities" class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <span class="section-badge">At Your Service</span>
+        <h2 class="text-4xl font-extrabold mt-4 text-gray-900">ITC Facilities</h2>
+        <p class="text-gray-500 mt-2">Resources available to all Orbit members</p>
+      </div>
+      <div class="rounded-2xl overflow-hidden shadow-xl">
+        <img src="Places/Facilities.png" alt="ITC Facilities" class="w-full object-cover">
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ MEMBERSHIP ═══════════════════════ -->
+  <section id="membership" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-12">
+        <span class="section-badge">Join Us</span>
+        <h2 class="text-4xl font-extrabold mt-4 text-gray-900">Membership Options</h2>
+        <p class="text-gray-500 mt-2">Unlock the full Orbit experience</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="rounded-2xl overflow-hidden shadow-lg">
+          <img src="Thumbnails/Orbit membership.jpg" alt="Orbit Membership" class="w-full object-cover"
+            style="max-height:440px;">
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold mb-2 text-gray-900">Orbit Organisation Membership</h3>
+          <p class="text-gray-500 text-sm leading-relaxed mb-6">
+            Becoming a member opens the door to a vibrant, enriching student life at ITC. Your voice is heard on
+            important matters - and you gain exclusive perks all year long:
+          </p>
+          <ul class="space-y-0">
+            <li class="perk-item">
+              <span class="text-blue-500 font-bold flex-shrink-0">✓</span>
+              <span class="text-gray-700 text-sm">Free access to the move-in market</span>
+            </li>
+            <li class="perk-item">
+              <span class="text-blue-500 font-bold flex-shrink-0">✓</span>
+              <span class="text-gray-700 text-sm">Free access to end of module parties with subsidized drinks at ITC
+                lounge</span>
+            </li>
+            <li class="perk-item">
+              <span class="text-blue-500 font-bold flex-shrink-0">✓</span>
+              <span class="text-gray-700 text-sm">Free indoor games: table tennis, chess, and pool (non-members
+                €4/hour)</span>
+            </li>
+            <li class="perk-item">
+              <span class="text-blue-500 font-bold flex-shrink-0">✓</span>
+              <span class="text-gray-700 text-sm">Free access to ITC hotel facilities (projector, sports
+                equipment)</span>
+            </li>
+            <li class="perk-item">
+              <span class="text-blue-500 font-bold flex-shrink-0">✓</span>
+              <span class="text-gray-700 text-sm">Free movies and matches organized in the lounge</span>
+            </li>
+            <li class="perk-item">
+              <span class="text-blue-500 font-bold flex-shrink-0">✓</span>
+              <span class="text-gray-700 text-sm">Free entrance to indoor ice skating and other fun activities</span>
+            </li>
+            <li class="perk-item">
+              <span class="text-blue-500 font-bold flex-shrink-0">✓</span>
+              <span class="text-gray-700 text-sm">Sponsorship for ITC International Food Festival</span>
+            </li>
+            <li class="perk-item">
+              <span class="text-blue-500 font-bold flex-shrink-0">✓</span>
+              <span class="text-gray-700 text-sm">Participation in annual sports competition and Batavierenrace</span>
+            </li>
+            <li class="perk-item">
+              <span class="text-blue-500 font-bold flex-shrink-0">✓</span>
+              <span class="text-gray-700 text-sm">Annual trip to the breathtaking Keukenhof flower garden</span>
+            </li>
+            <li class="perk-item">
+              <span class="text-blue-500 font-bold flex-shrink-0">✓</span>
+              <span class="text-gray-700 text-sm">Special rental/sale prices for bikes at Fietsenslijterij shop</span>
+            </li>
+          </ul>
+          <div class="mt-8">
+            <a href="https://universiteittwente.sharepoint.com/sites/StudentAssociationBoard/Gedeelde%20documenten/Forms/AllItems.aspx?id=%2Fsites%2FStudentAssociationBoard%2FGedeelde%20documenten%2FGeneral%2F2024%20Archive%2FOrbit%2Dmembership%2Dform%2DSEP2024%2Epdf&parent=%2Fsites%2FStudentAssociationBoard%2FGedeelde%20documenten%2FGeneral%2F2024%20Archive&p=true&ga=1.html"
+              target="_blank"
+              class="inline-flex items-center gap-2 bg-blue-600 text-white font-bold px-6 py-3 rounded-full hover:bg-blue-700 transition-colors shadow-md">
+              Download Membership Form
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ BOARD ═══════════════════════ -->
+  <section id="board" class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-14">
+        <span class="section-badge">The Team</span>
+        <h2 class="text-4xl font-extrabold mt-4 text-gray-900">Meet the Board</h2>
+        <p class="text-gray-500 mt-2">The passionate team behind Orbit 2024–2025</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <!-- Ishraque - President -->
+        <div class="board-card bg-white rounded-2xl overflow-hidden shadow-md">
+          <div class="h-1.5 bg-gradient-to-r from-blue-600 to-indigo-600"></div>
+          <div class="p-6 flex flex-col items-center text-center">
+            <img src="BoardMembers/Ishraque.png" alt="Ishraque Bin Khalil"
+              class="w-24 h-24 rounded-full object-cover shadow-md border-4 border-white ring-2 ring-blue-100 mb-4">
+            <h3 class="text-base font-bold text-gray-900">Ishraque Bin Khalil</h3>
+            <span
+              class="text-xs bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-semibold mt-1 mb-3">President</span>
+            <p class="text-gray-500 text-xs leading-relaxed text-center">
+              Leading Orbit with vision and dedication, fostering a welcoming and inclusive community for all ITC
+              students.
+            </p>
+          </div>
+        </div>
+
+        <!-- Avinash - General Secretary -->
+        <div class="board-card bg-white rounded-2xl overflow-hidden shadow-md">
+          <div class="h-1.5 bg-gradient-to-r from-purple-500 to-indigo-500"></div>
+          <div class="p-6 flex flex-col items-center text-center">
+            <img src="BoardMembers/Avinash.png" alt="Avinash Dhiran"
+              class="w-24 h-24 rounded-full object-cover shadow-md border-4 border-white ring-2 ring-purple-100 mb-4">
+            <h3 class="text-base font-bold text-gray-900">Avinash Dhiran</h3>
+            <span class="text-xs bg-purple-100 text-purple-700 px-3 py-1 rounded-full font-semibold mt-1 mb-3">General
+              Secretary</span>
+            <p class="text-gray-500 text-xs leading-relaxed text-center">
+              Coordinating board operations and ensuring smooth communication across all Orbit activities.
+            </p>
+          </div>
+        </div>
+
+        <!-- Shezan - Asst. Secretary / Media & Comms -->
+        <div class="board-card bg-white rounded-2xl overflow-hidden shadow-md">
+          <div class="h-1.5 bg-gradient-to-r from-pink-500 to-rose-500"></div>
+          <div class="p-6 flex flex-col items-center text-center">
+            <img src="BoardMembers/Shezan.png" alt="Naim Fardous Shezan"
+              class="w-24 h-24 rounded-full object-cover shadow-md border-4 border-white ring-2 ring-pink-100 mb-4">
+            <h3 class="text-base font-bold text-gray-900">Naim Fardous Shezan</h3>
+            <span class="text-xs bg-pink-100 text-pink-700 px-3 py-1 rounded-full font-semibold mt-1 mb-3">Asst.
+              Secretary &amp; Media</span>
+            <p class="text-gray-500 text-xs leading-relaxed text-center">
+              Handling media, communications, and keeping the ITC community informed and connected.
+            </p>
+          </div>
+        </div>
+
+        <!-- Arun - Treasurer -->
+        <div class="board-card bg-white rounded-2xl overflow-hidden shadow-md">
+          <div class="h-1.5 bg-gradient-to-r from-green-500 to-teal-500"></div>
+          <div class="p-6 flex flex-col items-center text-center">
+            <img src="BoardMembers/Arun.png" alt="Arun Chandran"
+              class="w-24 h-24 rounded-full object-cover shadow-md border-4 border-white ring-2 ring-green-100 mb-4">
+            <h3 class="text-base font-bold text-gray-900">Arun Chandran</h3>
+            <span
+              class="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full font-semibold mt-1 mb-3">Treasurer</span>
+            <p class="text-gray-500 text-xs leading-relaxed text-center">
+              Managing Orbit's finances to ensure every event runs smoothly and within budget.
+            </p>
+          </div>
+        </div>
+
+        <!-- Soya - Academic Affairs -->
+        <div class="board-card bg-white rounded-2xl overflow-hidden shadow-md">
+          <div class="h-1.5 bg-gradient-to-r from-yellow-400 to-amber-500"></div>
+          <div class="p-6 flex flex-col items-center text-center">
+            <img src="BoardMembers/Soya.png" alt="Soya Mol"
+              class="w-24 h-24 rounded-full object-cover shadow-md border-4 border-white ring-2 ring-yellow-100 mb-4">
+            <h3 class="text-base font-bold text-gray-900">Soya Mol</h3>
+            <span class="text-xs bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full font-semibold mt-1 mb-3">Academic
+              Affairs Coordinator</span>
+            <p class="text-gray-500 text-xs leading-relaxed text-center">
+              Ensuring every student's academic journey at ITC is smooth, supported, and empowering.
+            </p>
+          </div>
+        </div>
+
+        <!-- Aman - Sports Coordinator -->
+        <div class="board-card bg-white rounded-2xl overflow-hidden shadow-md">
+          <div class="h-1.5 bg-gradient-to-r from-red-500 to-orange-500"></div>
+          <div class="p-6 flex flex-col items-center text-center">
+            <img src="BoardMembers/Aman.png" alt="Aman Chaudhary"
+              class="w-24 h-24 rounded-full object-cover shadow-md border-4 border-white ring-2 ring-red-100 mb-4">
+            <h3 class="text-base font-bold text-gray-900">Aman Chaudhary</h3>
+            <span class="text-xs bg-red-100 text-red-700 px-3 py-1 rounded-full font-semibold mt-1 mb-3">Sports
+              Coordinator</span>
+            <p class="text-gray-500 text-xs leading-relaxed text-center">
+              Promoting fitness, teamwork, and an active campus culture for all ITC students.
+            </p>
+          </div>
+        </div>
+
+        <!-- Anisha - Social Coordinator -->
+        <div class="board-card bg-white rounded-2xl overflow-hidden shadow-md">
+          <div class="h-1.5 bg-gradient-to-r from-yellow-500 to-red-500"></div>
+          <div class="p-6 flex flex-col items-center text-center">
+            <img src="BoardMembers/Anisha.png" alt="Anisha"
+              class="w-24 h-24 rounded-full object-cover shadow-md border-4 border-white ring-2 ring-cyan-100 mb-4">
+            <h3 class="text-base font-bold text-gray-900">Anisha</h3>
+            <span class="text-xs bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full font-semibold mt-1 mb-3">Social
+              Coordinator</span>
+            <p class="text-gray-500 text-xs leading-relaxed text-center">
+              Organizing fun, inclusive social events that bring students together across cultures and backgrounds.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ CONTACT ═══════════════════════ -->
+  <section id="contact" class="py-20 relative" style="background-image: url('Thumbnails/Background2.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+    <div class="absolute inset-0" style="background: rgba(0,0,0,0.55); z-index:0;"></div>
+    <div class="max-w-4xl mx-auto px-6 text-center text-white relative z-10">
+      <span class="section-badge mb-5" style="background: rgba(255,255,255,0.18); backdrop-filter: blur(6px);">Get in
+        Touch</span>
+      <h2 class="text-4xl font-extrabold mt-4 mb-4">Contact Us</h2>
+      <p class="text-blue-200 mb-10 text-lg max-w-lg mx-auto">
+        Have questions or want to get involved? We'd love to hear from you.
+      </p>
+      <a href="mailto:sab-itc@utwente.nl"
+        class="inline-flex items-center gap-3 bg-white text-blue-900 font-bold px-8 py-4 rounded-full hover:bg-blue-50 transition-colors shadow-xl text-lg">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+        sab-itc@utwente.nl
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+  <footer class="bg-gray-900 text-gray-400 py-10">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="flex items-center gap-3">
+          <img src="logo.png" alt="Orbit Logo" class="w-10 h-10 rounded-full object-cover opacity-70">
+          <div>
+            <div class="font-bold text-white">Orbit Student Association</div>
+            <div class="text-xs">ITC · University of Twente</div>
+          </div>
+        </div>
+        <div class="flex flex-wrap justify-center gap-6 text-sm">
+          <a href="#intro" class="hover:text-white transition-colors">About</a>
+          <a href="#events" class="hover:text-white transition-colors">Events</a>
+          <a href="#calendar" class="hover:text-white transition-colors">Calendar</a>
+          <a href="#membership" class="hover:text-white transition-colors">Membership</a>
+          <a href="#board" class="hover:text-white transition-colors">Board</a>
+          <a href="#contact" class="hover:text-white transition-colors">Contact</a>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 mt-8 pt-6 text-center text-xs">
+        &copy; 2025 Orbit Student Association · University of Twente 
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════ CALENDAR SCRIPT ═══════════════════════ -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const calendarEl = document.getElementById('orbit-calendar');
+      const calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        height: 600,
+        headerToolbar: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,listMonth'
+        },
+        buttonText: { listMonth: 'List' },
+        events: [
+          { title: 'Appreciation Dinner – Past Board Members', start: '2024-11-21', description: 'A heartfelt evening dedicated to recognizing the dedication and contributions of former Orbit board members. Dinner, speeches, and warm moments of gratitude marked this celebration of leadership and legacy.' },
+          { title: 'ITC Student Resit Meeting', start: '2025-01-25', description: 'An informative session aimed at helping students prepare for upcoming resits. Academic advisors and board members shared guidelines, tips, and key resources for a successful exam experience.' },
+          { title: 'Orbit Movie Night', start: '2025-02-08', description: 'A cozy and fun-filled evening featuring a student-voted film screening. Snacks, laughter, and shared moments created a perfect break from academic life in the ITC lounge.' },
+          { title: 'Celebrating Love & Friendship', start: '2025-02-14', description: 'Valentine\'s event with anonymous love notes, dinner with friends, and a festive party.' },
+          { title: 'Dinner Event & Module End Party', start: '2025-03-07', description: 'A celebratory evening marking the end of the academic module. Students gathered for a delightful dinner followed by a vibrant party.' },
+          { title: 'International Food Festival', start: '2025-05-12', description: 'Delicious homemade dishes from 8+ countries.' },
+          { title: 'Picnic at Wooldrikspark', start: '2025-05-18', description: 'Games, nature, and furry friends at the park.' },
+          { title: 'International Sports Day', start: '2025-05-27', description: 'Volleyball, football, running, pétanque, and more - with participation from both students and staff.' },
+          { title: 'Teacher of the Year Competition', start: '2025-06-20', description: 'A formal evaluation event to select the best teacher at ITC based on teaching performance, student engagement, and overall impact.' },
+          { title: 'Teacher of the Year Celebration', start: '2025-07-15', description: 'Congratulations to Lucas De Oto for excellence in teaching!' },
+          { title: 'Graduation 2025', start: '2025-07-15', description: 'Cap-tossing and speeches for the graduating class of 2025.' },
+          { title: 'Move-In Market', start: '2025-08-31', description: 'A special student market offering utensils and essential products for free to Orbit members. Location: ITC Hotel Lounge.' },
+          { title: 'Welcome Party', start: '2025-09-05', description: 'A lively welcome event for the upcoming cohort at ITC. Meet peers, network, and enjoy an evening of fun and music.' },
+          { title: 'Ice Cream Walk', start: '2025-09-26', description: 'Join us for a refreshing ice cream walk in Wanderpool, Enschede Central.' },
+          { title: 'Amsterdam Trip', start: '2025-10-12', description: 'A day trip to Amsterdam to explore its famous sights.' },
+          { title: 'End of Module Party', start: '2025-11-07', description: 'Celebrate the successful completion of the module with music, snacks, and fun activities.' },
+        ],
+        eventClick: function (info) {
+          alert(info.event.title + '\n\n' + (info.event.extendedProps.description || ''));
+        }
+      });
+      calendar.render();
+    });
+  </script>
+
+</body>
+
+</html>
