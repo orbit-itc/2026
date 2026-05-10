@@ -149,6 +149,22 @@
     /* Chevron rotation */
     .group:hover .chevron { transform: rotate(180deg); }
     .chevron { transition: transform 0.25s ease; }
+
+    /* Prevent category pills from shrinking on mobile */
+    .cat-pill { flex-shrink: 0; }
+
+    /* Hide horizontal scrollbar on pill row */
+    .cat-pills-row { -webkit-overflow-scrolling: touch; scrollbar-width: none; -ms-overflow-style: none; }
+    .cat-pills-row::-webkit-scrollbar { display: none; }
+
+    /* Map height: compact on mobile, full on desktop */
+    #map { height: 280px; }
+
+    @media (min-width: 1024px) {
+      #map { height: calc(100vh - 160px); }
+      #map-sidebar { width: 420px; position: sticky; top: 72px; }
+      [data-storelist] { max-height: calc(100vh - 72px); overflow-y: auto; padding-right: 6px; scroll-behavior: smooth; }
+    }
   </style>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
@@ -217,7 +233,7 @@
         Previous Boards - 2024–2025 ↗
       </a>
       <div class="pt-3">
-        <a href="index.html" class="block bg-blue-600 text-white text-center py-2.5 rounded-lg font-semibold text-sm">← Back to Orbit</a>
+        <a href="stores.html" class="block bg-blue-600 text-white text-center py-2.5 rounded-lg font-semibold text-sm">Student Places</a>
       </div>
     </div>
   </header>
@@ -228,7 +244,7 @@
       <span class="section-badge mb-5" style="background: rgba(255,255,255,0.18); backdrop-filter: blur(6px);">
         Orbit · Enschede Guide
       </span>
-      <h2 class="text-4xl md:text-5xl font-extrabold mb-4 leading-tight mt-5">
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 leading-tight mt-5">
         Student Places of Interest<br>in Enschede
       </h2>
       <p class="text-gray-200 text-lg">
@@ -264,7 +280,7 @@
 
     <!-- Filter Bar -->
     <div class="bg-white border-b border-gray-100 py-3 px-4 shadow-sm">
-      <div class="max-w-7xl mx-auto flex flex-wrap gap-2 justify-center">
+      <div class="max-w-7xl mx-auto cat-pills-row flex gap-2 overflow-x-auto pb-1">
         <button @click="setCategory('all')" :class="{ 'active': selectedCategory === 'all' }" class="cat-pill">All</button>
         <button @click="setCategory('groceries')" :class="{ 'active': selectedCategory === 'groceries' }" class="cat-pill">🛒 Groceries</button>
         <button @click="setCategory('home')" :class="{ 'active': selectedCategory === 'home' }" class="cat-pill">🏠 Home Supplies</button>
@@ -284,10 +300,15 @@
     </div>
 
     <!-- Store Listings + Sticky Map Layout -->
-    <div class="max-w-7xl mx-auto px-4 py-8 flex gap-8 items-start">
+    <div class="max-w-7xl mx-auto px-4 py-8 flex flex-col lg:flex-row gap-8 items-start">
 
     <!-- LEFT: Scrollable store list -->
-    <div class="flex-1 min-w-0" data-storelist style="max-height: calc(100vh - 72px); overflow-y: auto; padding-right: 6px; scroll-behavior: smooth;">
+    <div class="flex-1 min-w-0" data-storelist>
+      <!-- Mobile only: quick link to map below -->
+      <div class="lg:hidden mb-4 text-center">
+        <a href="#map" class="cat-pill">📍 View on Map ↓</a>
+      </div>
+
       <section id="stores" class="space-y-12 py-4">
         <template x-if="stores.length === 0">
           <div class="flex items-center justify-center py-20 text-gray-400 text-lg">Loading places…</div>
@@ -316,11 +337,11 @@
       </section>
     </div><!-- end scrollable list -->
 
-    <!-- RIGHT: Sticky map -->
-    <div class="hidden lg:block flex-shrink-0 sticky top-[72px]" style="width: 420px;">
+    <!-- Map: full-width below stores on mobile, sticky sidebar on desktop -->
+    <div id="map-sidebar" class="w-full lg:flex-shrink-0">
       <div class="py-4">
         <h3 class="text-lg font-bold mb-3 text-gray-900">📍 Enschede Map</h3>
-        <div id="map" class="rounded-xl shadow-lg border border-gray-100" style="height: calc(100vh - 160px);"></div>
+        <div id="map" class="rounded-xl shadow-lg border border-gray-100"></div>
       </div>
     </div>
 
@@ -497,6 +518,7 @@
 
       focusStore(store) {
         if (!store.lat || !store.lng) return;
+        this.map.invalidateSize();
         this.map.flyTo([store.lat, store.lng], 17, { duration: 1.2 });
         const marker = this.allMarkers.find(m => m.storeName === store.name);
         if (marker) setTimeout(() => marker.openPopup(), 1250);
