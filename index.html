@@ -165,6 +165,92 @@
     .group:hover .nav-dropdown {
       display: block;
     }
+
+    /* ── Gallery Marquee ── */
+    @keyframes scroll-left {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    @keyframes scroll-right {
+      0%   { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
+    }
+
+    .gallery-track-wrapper {
+      overflow: hidden;
+      mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    }
+
+    .gallery-track {
+      display: flex;
+      gap: 14px;
+      width: max-content;
+      will-change: transform;
+    }
+
+    .gallery-track-left  { animation: scroll-left  38s linear infinite; }
+    .gallery-track-right { animation: scroll-right 44s linear infinite; }
+
+    .gallery-track-wrapper:hover .gallery-track {
+      animation-play-state: paused;
+    }
+
+    .gallery-img {
+      width: 280px;
+      height: 190px;
+      object-fit: cover;
+      border-radius: 14px;
+      flex-shrink: 0;
+      box-shadow: 0 6px 22px rgba(0,0,0,0.45);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      cursor: pointer;
+    }
+
+    .gallery-img:hover {
+      transform: scale(1.07) translateY(-4px);
+      box-shadow: 0 18px 44px rgba(0,0,0,0.65);
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Lightbox overlay */
+    #gallery-lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.88);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #gallery-lightbox.open {
+      display: flex;
+    }
+
+    #gallery-lightbox img {
+      max-width: 90vw;
+      max-height: 85vh;
+      border-radius: 16px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.8);
+      object-fit: contain;
+    }
+
+    #gallery-lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 28px;
+      color: white;
+      font-size: 2.2rem;
+      cursor: pointer;
+      line-height: 1;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+
+    #gallery-lightbox-close:hover { opacity: 1; }
   </style>
 </head>
 
@@ -199,6 +285,8 @@
 
         <a href="#board"
           class="font-semibold text-sm text-gray-700 hover:text-blue-600 px-3 py-2 rounded-lg hover:bg-blue-50 transition-colors">Board</a>
+        <a href="#gallery"
+          class="font-semibold text-sm text-gray-700 hover:text-blue-600 px-3 py-2 rounded-lg hover:bg-blue-50 transition-colors">Gallery</a>
         <a href="#contact"
           class="font-semibold text-sm text-gray-700 hover:text-blue-600 px-3 py-2 rounded-lg hover:bg-blue-50 transition-colors">Contact
           Us</a>
@@ -241,6 +329,8 @@
 
       <a href="#board" @click="menuOpen=false"
         class="block py-2.5 text-gray-700 hover:text-blue-600 border-b border-gray-50 text-sm">Board</a>
+      <a href="#gallery" @click="menuOpen=false"
+        class="block py-2.5 text-gray-700 hover:text-blue-600 border-b border-gray-50 text-sm">Gallery</a>
       <a href="#contact" @click="menuOpen=false" class="block py-2.5 text-gray-700 hover:text-blue-600 text-sm">Contact
         Us</a>
 
@@ -343,7 +433,7 @@
             Student-led</div>
           <div
             class="absolute -bottom-3 -left-3 bg-indigo-600 text-white text-xs px-3 py-1.5 rounded-full font-bold shadow-lg">
-            Inclusive ✓</div>
+            Inclusive</div>
         </div>
       </div>
     </div>
@@ -563,7 +653,7 @@
   </section>
 
   <!-- ═══════════════════════ CALENDAR ═══════════════════════ -->
-  <section id="calendar" class="py-20 bg-white">
+  <!-- <section id="calendar" class="py-20 bg-white">
     <div class="max-w-6xl mx-auto px-4">
       <div class="text-center mb-10">
         <span class="section-badge">Stay Updated</span>
@@ -574,7 +664,7 @@
         <div id="orbit-calendar"></div>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <!-- ═══════════════════════ FACILITIES ═══════════════════════ -->
   <section id="facilities" class="py-20 bg-gray-50">
@@ -788,6 +878,77 @@
     </div>
   </section>
 
+  <!-- ═══════════════════════ GALLERY ═══════════════════════ -->
+  <section id="gallery" class="py-20 overflow-hidden" style="background: linear-gradient(160deg, #0a0f1e 0%, #1a1150 45%, #0d1a3a 100%);">
+    <div class="max-w-7xl mx-auto px-6 mb-12 text-center">
+      <span class="section-badge" style="background: linear-gradient(135deg, #6366f1, #a855f7);">Memories</span>
+      <h2 class="text-3xl md:text-4xl font-extrabold mt-4 text-white">Our Gallery</h2>
+      <p class="mt-2" style="color: #a5b4fc;">Scroll through the moments we'll always cherish</p>
+    </div>
+
+    <!-- Row 1 — scrolls left -->
+    <div class="gallery-track-wrapper mb-4">
+      <div class="gallery-track gallery-track-left">
+        <!-- Set 1 -->
+        <img class="gallery-img" src="Gallery/1.jpg"       alt="Gallery"       onclick="openLightbox(this.src)">
+        <img class="gallery-img" src="Gallery/2.jpg" alt="International Evening" onclick="openLightbox(this.src)">
+        <img class="gallery-img" src="Gallery/3.jpg"        alt="Gallery"       onclick="openLightbox(this.src)">
+        <img class="gallery-img" src="Gallery/4.jpg"        alt="Gallery"        onclick="openLightbox(this.src)">
+        <img class="gallery-img" src="Gallery/5.jpg"            alt="Gallery"            onclick="openLightbox(this.src)">
+        <img class="gallery-img" src="Gallery/6.jpg"    alt="Gallery"    onclick="openLightbox(this.src)">
+        <img class="gallery-img" src="Gallery/7.jpg"               alt="Gallery"               onclick="openLightbox(this.src)">
+        <img class="gallery-img" src="Gallery/8.jpg"  alt="Gallery"  onclick="openLightbox(this.src)">
+        <img class="gallery-img" src="Gallery/9.jpg"           alt="Gallery"           onclick="openLightbox(this.src)">
+        <img class="gallery-img" src="Gallery/10.jpg"            alt="Gallery"            onclick="openLightbox(this.src)">
+        <!-- Set 2 (duplicate for seamless loop) -->
+        <img class="gallery-img" src="Gallery/1.jpg"       alt="Gallery"       onclick="openLightbox(this.src)">
+        <img class="gallery-img" src="Gallery/2.jpg" alt="Gallery" onclick="openLightbox(this.src)">
+        <img class="gallery-img" src="Gallery/3.jpg"         alt="Gallery"         onclick="openLightbox(this.src)">
+        <img class="gallery-img" src="Gallery/4.jpg"        alt="Gallery"       onclick="openLightbox(this.src)">
+        <img class="gallery-img" src="Gallery/5.jpg"           alt="Gallery"          onclick="openLightbox(this.src)">
+        <img class="gallery-img" src="Gallery/6.jpg"    alt="Gallery"   onclick="openLightbox(this.src)">
+        <img class="gallery-img" src="Gallery/7.jpg"               alt="Gallery"          onclick="openLightbox(this.src)">
+        <img class="gallery-img" src="Gallery/8.jpg"  alt="Gallery"  onclick="openLightbox(this.src)">
+        <img class="gallery-img" src="Gallery/9.jpg"           alt="Gallery"          onclick="openLightbox(this.src)">
+        <img class="gallery-img" src="Gallery/10.jpg"            alt="Gallery"           onclick="openLightbox(this.src)">
+      </div>
+    </div>
+
+    <!-- Row 2 — scrolls right -->
+    <div class="gallery-track-wrapper">
+      <div class="gallery-track gallery-track-right">
+        <!-- Set 1 -->
+        <img class="gallery-img" src="Gallery/3.jpg"   alt="Gallery"   onclick="openLightbox(this.src)">
+        <img class="gallery-img" src="Gallery/4.jpg"          alt="Gallery"          onclick="openLightbox(this.src)">
+        <img class="gallery-img" src="Gallery/1.jpg"        alt="Gallery"       onclick="openLightbox(this.src)">
+        <img class="gallery-img" src="Gallery/2.jpg"         alt="Gallery"            onclick="openLightbox(this.src)">
+        <img class="gallery-img" src="Gallery/5.jpg"        alt="Gallery"         onclick="openLightbox(this.src)">
+        <img class="gallery-img" src="Gallery/6.jpg"          alt="Gallery"         onclick="openLightbox(this.src)">
+        <img class="gallery-img" src="Gallery/8.jpg"      alt="Gallery"      onclick="openLightbox(this.src)">
+        <img class="gallery-img" src="Gallery/7.jpg"              alt="Gallery"                onclick="openLightbox(this.src)">
+        <img class="gallery-img" src="Gallery/9.jpg"      alt="Gallery"                onclick="openLightbox(this.src)">
+        <!-- Set 2 (duplicate for seamless loop) -->
+        <img class="gallery-img" src="Gallery/1.jpg"  alt="Gallery"   onclick="openLightbox(this.src)">
+        <img class="gallery-img" src="Gallery/10.jpg"         alt="Gallery"           onclick="openLightbox(this.src)">
+        <img class="gallery-img" src="Gallery/3.jpg"       alt="Gallery"         onclick="openLightbox(this.src)">
+        <img class="gallery-img" src="Gallery/8.jpg"           alt="Gallery"           onclick="openLightbox(this.src)">
+        <img class="gallery-img" src="Gallery/6.jpg"     alt="Gallery"        onclick="openLightbox(this.src)">
+        <img class="gallery-img" src="Gallery/7.jpg"       alt="Gallery"        onclick="openLightbox(this.src)">
+        <img class="gallery-img" src="Gallery/5.jpg"  alt="Gallery"        onclick="openLightbox(this.src)">
+        <img class="gallery-img" src="Gallery/4.jpg"         alt="Gallery"              onclick="openLightbox(this.src)">
+        <img class="gallery-img" src="Gallery/3.jpg"     alt="Gallery"              onclick="openLightbox(this.src)">
+      </div>
+    </div>
+
+
+  </section>
+
+  <!-- Lightbox -->
+  <div id="gallery-lightbox" onclick="closeLightbox()">
+    <span id="gallery-lightbox-close" onclick="closeLightbox()">&times;</span>
+    <img id="gallery-lightbox-img" src="" alt="Gallery image">
+  </div>
+
   <!-- ═══════════════════════ CONTACT ═══════════════════════ -->
   <section id="contact" class="py-20 relative" style="background-image: url('Thumbnails/Background2.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
     <div class="absolute inset-0" style="background: rgba(0,0,0,0.55); z-index:0;"></div>
@@ -826,6 +987,7 @@
           <a href="#calendar" class="hover:text-white transition-colors">Calendar</a>
           <a href="#membership" class="hover:text-white transition-colors">Membership</a>
           <a href="#board" class="hover:text-white transition-colors">Board</a>
+          <a href="#gallery" class="hover:text-white transition-colors">Gallery</a>
           <a href="#contact" class="hover:text-white transition-colors">Contact</a>
         </div>
       </div>
@@ -835,48 +997,64 @@
     </div>
   </footer>
 
+  <!-- ═══════════════════════ GALLERY LIGHTBOX SCRIPT ═══════════════════════ -->
+  <script>
+    function openLightbox(src) {
+      document.getElementById('gallery-lightbox-img').src = src;
+      document.getElementById('gallery-lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('gallery-lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
+
   <!-- ═══════════════════════ CALENDAR SCRIPT ═══════════════════════ -->
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const calendarEl = document.getElementById('orbit-calendar');
-      const isMobile = window.innerWidth < 768;
-      const calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: isMobile ? 'listMonth' : 'dayGridMonth',
-        height: isMobile ? 420 : 600,
-        headerToolbar: isMobile ? {
-          left: 'prev,next',
-          center: 'title',
-          right: 'today'
-        } : {
-          left: 'prev,next today',
-          center: 'title',
-          right: 'dayGridMonth,listMonth'
-        },
-        buttonText: { listMonth: 'List' },
-        events: [
-          { title: 'Appreciation Dinner – Past Board Members', start: '2024-11-21', description: 'A heartfelt evening dedicated to recognizing the dedication and contributions of former Orbit board members. Dinner, speeches, and warm moments of gratitude marked this celebration of leadership and legacy.' },
-          { title: 'ITC Student Resit Meeting', start: '2025-01-25', description: 'An informative session aimed at helping students prepare for upcoming resits. Academic advisors and board members shared guidelines, tips, and key resources for a successful exam experience.' },
-          { title: 'Orbit Movie Night', start: '2025-02-08', description: 'A cozy and fun-filled evening featuring a student-voted film screening. Snacks, laughter, and shared moments created a perfect break from academic life in the ITC lounge.' },
-          { title: 'Celebrating Love & Friendship', start: '2025-02-14', description: 'Valentine\'s event with anonymous love notes, dinner with friends, and a festive party.' },
-          { title: 'Dinner Event & Module End Party', start: '2025-03-07', description: 'A celebratory evening marking the end of the academic module. Students gathered for a delightful dinner followed by a vibrant party.' },
-          { title: 'International Food Festival', start: '2025-05-12', description: 'Delicious homemade dishes from 8+ countries.' },
-          { title: 'Picnic at Wooldrikspark', start: '2025-05-18', description: 'Games, nature, and furry friends at the park.' },
-          { title: 'International Sports Day', start: '2025-05-27', description: 'Volleyball, football, running, pétanque, and more - with participation from both students and staff.' },
-          { title: 'Teacher of the Year Competition', start: '2025-06-20', description: 'A formal evaluation event to select the best teacher at ITC based on teaching performance, student engagement, and overall impact.' },
-          { title: 'Teacher of the Year Celebration', start: '2025-07-15', description: 'Congratulations to Lucas De Oto for excellence in teaching!' },
-          { title: 'Graduation 2025', start: '2025-07-15', description: 'Cap-tossing and speeches for the graduating class of 2025.' },
-          { title: 'Move-In Market', start: '2025-08-31', description: 'A special student market offering utensils and essential products for free to Orbit members. Location: ITC Hotel Lounge.' },
-          { title: 'Welcome Party', start: '2025-09-05', description: 'A lively welcome event for the upcoming cohort at ITC. Meet peers, network, and enjoy an evening of fun and music.' },
-          { title: 'Ice Cream Walk', start: '2025-09-26', description: 'Join us for a refreshing ice cream walk in Wanderpool, Enschede Central.' },
-          { title: 'Amsterdam Trip', start: '2025-10-12', description: 'A day trip to Amsterdam to explore its famous sights.' },
-          { title: 'End of Module Party', start: '2025-11-07', description: 'Celebrate the successful completion of the module with music, snacks, and fun activities.' },
-        ],
-        eventClick: function (info) {
-          alert(info.event.title + '\n\n' + (info.event.extendedProps.description || ''));
-        }
-      });
-      calendar.render();
-    });
+    // document.addEventListener('DOMContentLoaded', function () {
+    //   const calendarEl = document.getElementById('orbit-calendar');
+    //   const isMobile = window.innerWidth < 768;
+    //   const calendar = new FullCalendar.Calendar(calendarEl, {
+    //     initialView: isMobile ? 'listMonth' : 'dayGridMonth',
+    //     height: isMobile ? 420 : 600,
+    //     headerToolbar: isMobile ? {
+    //       left: 'prev,next',
+    //       center: 'title',
+    //       right: 'today'
+    //     } : {
+    //       left: 'prev,next today',
+    //       center: 'title',
+    //       right: 'dayGridMonth,listMonth'
+    //     },
+    //     buttonText: { listMonth: 'List' },
+    //     events: [
+    //       { title: 'Appreciation Dinner – Past Board Members', start: '2024-11-21', description: 'A heartfelt evening dedicated to recognizing the dedication and contributions of former Orbit board members. Dinner, speeches, and warm moments of gratitude marked this celebration of leadership and legacy.' },
+    //       { title: 'ITC Student Resit Meeting', start: '2025-01-25', description: 'An informative session aimed at helping students prepare for upcoming resits. Academic advisors and board members shared guidelines, tips, and key resources for a successful exam experience.' },
+    //       { title: 'Orbit Movie Night', start: '2025-02-08', description: 'A cozy and fun-filled evening featuring a student-voted film screening. Snacks, laughter, and shared moments created a perfect break from academic life in the ITC lounge.' },
+    //       { title: 'Celebrating Love & Friendship', start: '2025-02-14', description: 'Valentine\'s event with anonymous love notes, dinner with friends, and a festive party.' },
+    //       { title: 'Dinner Event & Module End Party', start: '2025-03-07', description: 'A celebratory evening marking the end of the academic module. Students gathered for a delightful dinner followed by a vibrant party.' },
+    //       { title: 'International Food Festival', start: '2025-05-12', description: 'Delicious homemade dishes from 8+ countries.' },
+    //       { title: 'Picnic at Wooldrikspark', start: '2025-05-18', description: 'Games, nature, and furry friends at the park.' },
+    //       { title: 'International Sports Day', start: '2025-05-27', description: 'Volleyball, football, running, pétanque, and more - with participation from both students and staff.' },
+    //       { title: 'Teacher of the Year Competition', start: '2025-06-20', description: 'A formal evaluation event to select the best teacher at ITC based on teaching performance, student engagement, and overall impact.' },
+    //       { title: 'Teacher of the Year Celebration', start: '2025-07-15', description: 'Congratulations to Lucas De Oto for excellence in teaching!' },
+    //       { title: 'Graduation 2025', start: '2025-07-15', description: 'Cap-tossing and speeches for the graduating class of 2025.' },
+    //       { title: 'Move-In Market', start: '2025-08-31', description: 'A special student market offering utensils and essential products for free to Orbit members. Location: ITC Hotel Lounge.' },
+    //       { title: 'Welcome Party', start: '2025-09-05', description: 'A lively welcome event for the upcoming cohort at ITC. Meet peers, network, and enjoy an evening of fun and music.' },
+    //       { title: 'Ice Cream Walk', start: '2025-09-26', description: 'Join us for a refreshing ice cream walk in Wanderpool, Enschede Central.' },
+    //       { title: 'Amsterdam Trip', start: '2025-10-12', description: 'A day trip to Amsterdam to explore its famous sights.' },
+    //       { title: 'End of Module Party', start: '2025-11-07', description: 'Celebrate the successful completion of the module with music, snacks, and fun activities.' },
+    //     ],
+    //     eventClick: function (info) {
+    //       alert(info.event.title + '\n\n' + (info.event.extendedProps.description || ''));
+    //     }
+    //   });
+    //   calendar.render();
+    // });
   </script>
 
 </body>
